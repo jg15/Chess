@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		57629ED61716501500FAD354 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED51716501500FAD354 /* UIKit.framework */; };
+		57629ED81716501500FAD354 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED71716501500FAD354 /* Foundation.framework */; };
+		57629EDA1716501500FAD354 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED91716501500FAD354 /* CoreGraphics.framework */; };
+		57629EE01716501500FAD354 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 57629EDE1716501500FAD354 /* InfoPlist.strings */; };
+		57629EE21716501500FAD354 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629EE11716501500FAD354 /* main.m */; };
+		57629EE61716501500FAD354 /* ChessAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629EE51716501500FAD354 /* ChessAppDelegate.m */; };
+		57629EE81716501500FAD354 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 57629EE71716501500FAD354 /* Default.png */; };
+		57629EEA1716501500FAD354 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57629EE91716501500FAD354 /* Default@2x.png */; };
+		57629EEC1716501500FAD354 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 57629EEB1716501500FAD354 /* Default-568h@2x.png */; };
+		57629EEF1716501500FAD354 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57629EED1716501500FAD354 /* MainStoryboard_iPhone.storyboard */; };
+		57629EF21716501500FAD354 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57629EF01716501500FAD354 /* MainStoryboard_iPad.storyboard */; };
+		57629EF51716501500FAD354 /* ChessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629EF41716501500FAD354 /* ChessViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		57629ED21716501500FAD354 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57629ED51716501500FAD354 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		57629ED71716501500FAD354 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		57629ED91716501500FAD354 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		57629EDD1716501500FAD354 /* Chess-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Chess-Info.plist"; sourceTree = "<group>"; };
+		57629EDF1716501500FAD354 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		57629EE11716501500FAD354 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		57629EE31716501500FAD354 /* Chess-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chess-Prefix.pch"; sourceTree = "<group>"; };
+		57629EE41716501500FAD354 /* ChessAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessAppDelegate.h; sourceTree = "<group>"; };
+		57629EE51716501500FAD354 /* ChessAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessAppDelegate.m; sourceTree = "<group>"; };
+		57629EE71716501500FAD354 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		57629EE91716501500FAD354 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		57629EEB1716501500FAD354 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		57629EEE1716501500FAD354 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		57629EF11716501500FAD354 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		57629EF31716501500FAD354 /* ChessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessViewController.h; sourceTree = "<group>"; };
+		57629EF41716501500FAD354 /* ChessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		57629ECF1716501500FAD354 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57629ED61716501500FAD354 /* UIKit.framework in Frameworks */,
+				57629ED81716501500FAD354 /* Foundation.framework in Frameworks */,
+				57629EDA1716501500FAD354 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		57629EC91716501500FAD354 = {
+			isa = PBXGroup;
+			children = (
+				57629EDB1716501500FAD354 /* Chess */,
+				57629ED41716501500FAD354 /* Frameworks */,
+				57629ED31716501500FAD354 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		57629ED31716501500FAD354 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57629ED21716501500FAD354 /* Chess.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		57629ED41716501500FAD354 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57629ED51716501500FAD354 /* UIKit.framework */,
+				57629ED71716501500FAD354 /* Foundation.framework */,
+				57629ED91716501500FAD354 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		57629EDB1716501500FAD354 /* Chess */ = {
+			isa = PBXGroup;
+			children = (
+				57629EE41716501500FAD354 /* ChessAppDelegate.h */,
+				57629EE51716501500FAD354 /* ChessAppDelegate.m */,
+				57629EED1716501500FAD354 /* MainStoryboard_iPhone.storyboard */,
+				57629EF01716501500FAD354 /* MainStoryboard_iPad.storyboard */,
+				57629EF31716501500FAD354 /* ChessViewController.h */,
+				57629EF41716501500FAD354 /* ChessViewController.m */,
+				57629EDC1716501500FAD354 /* Supporting Files */,
+			);
+			path = Chess;
+			sourceTree = "<group>";
+		};
+		57629EDC1716501500FAD354 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				57629EDD1716501500FAD354 /* Chess-Info.plist */,
+				57629EDE1716501500FAD354 /* InfoPlist.strings */,
+				57629EE11716501500FAD354 /* main.m */,
+				57629EE31716501500FAD354 /* Chess-Prefix.pch */,
+				57629EE71716501500FAD354 /* Default.png */,
+				57629EE91716501500FAD354 /* Default@2x.png */,
+				57629EEB1716501500FAD354 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		57629ED11716501500FAD354 /* Chess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57629EF81716501500FAD354 /* Build configuration list for PBXNativeTarget "Chess" */;
+			buildPhases = (
+				57629ECE1716501500FAD354 /* Sources */,
+				57629ECF1716501500FAD354 /* Frameworks */,
+				57629ED01716501500FAD354 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Chess;
+			productName = Chess;
+			productReference = 57629ED21716501500FAD354 /* Chess.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		57629ECA1716501500FAD354 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Chess;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Joshua Girard";
+			};
+			buildConfigurationList = 57629ECD1716501500FAD354 /* Build configuration list for PBXProject "Chess" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 57629EC91716501500FAD354;
+			productRefGroup = 57629ED31716501500FAD354 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				57629ED11716501500FAD354 /* Chess */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		57629ED01716501500FAD354 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57629EE01716501500FAD354 /* InfoPlist.strings in Resources */,
+				57629EE81716501500FAD354 /* Default.png in Resources */,
+				57629EEA1716501500FAD354 /* Default@2x.png in Resources */,
+				57629EEC1716501500FAD354 /* Default-568h@2x.png in Resources */,
+				57629EEF1716501500FAD354 /* MainStoryboard_iPhone.storyboard in Resources */,
+				57629EF21716501500FAD354 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		57629ECE1716501500FAD354 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57629EE21716501500FAD354 /* main.m in Sources */,
+				57629EE61716501500FAD354 /* ChessAppDelegate.m in Sources */,
+				57629EF51716501500FAD354 /* ChessViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		57629EDE1716501500FAD354 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57629EDF1716501500FAD354 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		57629EED1716501500FAD354 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57629EEE1716501500FAD354 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		57629EF01716501500FAD354 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				57629EF11716501500FAD354 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		57629EF61716501500FAD354 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57629EF71716501500FAD354 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		57629EF91716501500FAD354 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
+				INFOPLIST_FILE = "Chess/Chess-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		57629EFA1716501500FAD354 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
+				INFOPLIST_FILE = "Chess/Chess-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57629ECD1716501500FAD354 /* Build configuration list for PBXProject "Chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57629EF61716501500FAD354 /* Debug */,
+				57629EF71716501500FAD354 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57629EF81716501500FAD354 /* Build configuration list for PBXNativeTarget "Chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57629EF91716501500FAD354 /* Debug */,
+				57629EFA1716501500FAD354 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 57629ECA1716501500FAD354 /* Project object */;
+}
