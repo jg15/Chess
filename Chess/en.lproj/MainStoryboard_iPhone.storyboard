@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--Chess View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ChessViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="haw-7n-hv3"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="4pt-KF-QES">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="DuA-QV-QjN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="haw-7n-hv3" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="1y3-S4-UTT"/>
+                            <constraint firstItem="4pt-KF-QES" firstAttribute="centerY" secondItem="haw-7n-hv3" secondAttribute="centerY" type="default" id="3t6-yd-U6m"/>
+                            <constraint firstItem="4pt-KF-QES" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" type="default" id="5tq-5l-F3a"/>
+                            <constraint firstItem="4pt-KF-QES" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="6Zt-fZ-mWt"/>
+                            <constraint firstItem="haw-7n-hv3" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="QLA-Ji-1B4"/>
+                            <constraint firstItem="haw-7n-hv3" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="fKP-Z2-SgD"/>
+                            <constraint firstItem="4pt-KF-QES" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="yf1-Ui-KYl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="haw-7n-hv3" id="Jrj-3y-7E3"/>
+                        <outlet property="boardImage" destination="4pt-KF-QES" id="SSh-60-lr3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="33" y="161"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

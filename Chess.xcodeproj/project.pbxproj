@@ -19,6 +19,14 @@
 		57629EEF1716501500FAD354 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57629EED1716501500FAD354 /* MainStoryboard_iPhone.storyboard */; };
 		57629EF21716501500FAD354 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57629EF01716501500FAD354 /* MainStoryboard_iPad.storyboard */; };
 		57629EF51716501500FAD354 /* ChessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629EF41716501500FAD354 /* ChessViewController.m */; };
+		57629F031716597E00FAD354 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F021716597E00FAD354 /* Board.m */; };
+		57629F0817165DBD00FAD354 /* ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F0717165DBD00FAD354 /* ChessBoard.m */; };
+		57629F0A1716606100FAD354 /* Board(old).png in Resources */ = {isa = PBXBuildFile; fileRef = 57629F091716606000FAD354 /* Board(old).png */; };
+		57629F101716661000FAD354 /* Pieces in Resources */ = {isa = PBXBuildFile; fileRef = 57629F0F1716661000FAD354 /* Pieces */; };
+		57629F131716667F00FAD354 /* BoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F111716667F00FAD354 /* BoardSquare.m */; };
+		57629F16171667D300FAD354 /* ChessBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F15171667D300FAD354 /* ChessBoardView.m */; };
+		57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AA91D61717CCCC00337E28 /* MulticastDelegate.m */; };
+		57B513E2171A2FB70072B337 /* Board.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B513E1171A2FB70072B337 /* Board.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +47,23 @@
 		57629EF11716501500FAD354 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		57629EF31716501500FAD354 /* ChessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessViewController.h; sourceTree = "<group>"; };
 		57629EF41716501500FAD354 /* ChessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessViewController.m; sourceTree = "<group>"; };
+		57629F001716583200FAD354 /* BoardCellState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
+		57629F011716597E00FAD354 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		57629F021716597E00FAD354 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
+		57629F0617165DBD00FAD354 /* ChessBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoard.h; sourceTree = "<group>"; };
+		57629F0717165DBD00FAD354 /* ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoard.m; sourceTree = "<group>"; };
+		57629F091716606000FAD354 /* Board(old).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Board(old).png"; sourceTree = "<group>"; };
+		57629F0F1716661000FAD354 /* Pieces */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pieces; sourceTree = "<group>"; };
+		57629F111716667F00FAD354 /* BoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquare.m; path = Chess/BoardSquare.m; sourceTree = "<group>"; };
+		57629F121716667F00FAD354 /* BoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquare.h; path = Chess/BoardSquare.h; sourceTree = "<group>"; };
+		57629F14171667D300FAD354 /* ChessBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardView.h; sourceTree = "<group>"; };
+		57629F15171667D300FAD354 /* ChessBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardView.m; sourceTree = "<group>"; };
+		57AA91D31717CBB300337E28 /* BoardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardDelegate.h; sourceTree = "<group>"; };
+		57AA91D51717CCCC00337E28 /* MulticastDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
+		57AA91D61717CCCC00337E28 /* MulticastDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
+		57AA91D81717D99A00337E28 /* PlayerTurnState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTurnState.h; sourceTree = "<group>"; };
+		57B513E1171A2FB70072B337 /* Board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Board.png; sourceTree = "<group>"; };
+		57B513E4171A84500072B337 /* BoardNavigationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardNavigationFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +110,16 @@
 		57629EDB1716501500FAD354 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
-				57629EE41716501500FAD354 /* ChessAppDelegate.h */,
-				57629EE51716501500FAD354 /* ChessAppDelegate.m */,
+				57AA91D41717CCB300337E28 /* Utilities */,
+				57629EFD1716520400FAD354 /* Assets */,
+				57629F041716599500FAD354 /* Model */,
+				57629F0B1716608600FAD354 /* View */,
 				57629EED1716501500FAD354 /* MainStoryboard_iPhone.storyboard */,
 				57629EF01716501500FAD354 /* MainStoryboard_iPad.storyboard */,
 				57629EF31716501500FAD354 /* ChessViewController.h */,
 				57629EF41716501500FAD354 /* ChessViewController.m */,
+				57629EE41716501500FAD354 /* ChessAppDelegate.h */,
+				57629EE51716501500FAD354 /* ChessAppDelegate.m */,
 				57629EDC1716501500FAD354 /* Supporting Files */,
 			);
 			path = Chess;
@@ -108,6 +137,52 @@
 				57629EEB1716501500FAD354 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		57629EFD1716520400FAD354 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				57B513E1171A2FB70072B337 /* Board.png */,
+				57629F0F1716661000FAD354 /* Pieces */,
+				57629F091716606000FAD354 /* Board(old).png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		57629F041716599500FAD354 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57B513E4171A84500072B337 /* BoardNavigationFunctions.h */,
+				57AA91D31717CBB300337E28 /* BoardDelegate.h */,
+				57629F001716583200FAD354 /* BoardCellState.h */,
+				57AA91D81717D99A00337E28 /* PlayerTurnState.h */,
+				57629F011716597E00FAD354 /* Board.h */,
+				57629F021716597E00FAD354 /* Board.m */,
+				57629F0617165DBD00FAD354 /* ChessBoard.h */,
+				57629F0717165DBD00FAD354 /* ChessBoard.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		57629F0B1716608600FAD354 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57629F121716667F00FAD354 /* BoardSquare.h */,
+				57629F111716667F00FAD354 /* BoardSquare.m */,
+				57629F14171667D300FAD354 /* ChessBoardView.h */,
+				57629F15171667D300FAD354 /* ChessBoardView.m */,
+			);
+			name = View;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		57AA91D41717CCB300337E28 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				57AA91D51717CCCC00337E28 /* MulticastDelegate.h */,
+				57AA91D61717CCCC00337E28 /* MulticastDelegate.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +243,9 @@
 				57629EEC1716501500FAD354 /* Default-568h@2x.png in Resources */,
 				57629EEF1716501500FAD354 /* MainStoryboard_iPhone.storyboard in Resources */,
 				57629EF21716501500FAD354 /* MainStoryboard_iPad.storyboard in Resources */,
+				57629F0A1716606100FAD354 /* Board(old).png in Resources */,
+				57629F101716661000FAD354 /* Pieces in Resources */,
+				57B513E2171A2FB70072B337 /* Board.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +259,11 @@
 				57629EE21716501500FAD354 /* main.m in Sources */,
 				57629EE61716501500FAD354 /* ChessAppDelegate.m in Sources */,
 				57629EF51716501500FAD354 /* ChessViewController.m in Sources */,
+				57629F031716597E00FAD354 /* Board.m in Sources */,
+				57629F0817165DBD00FAD354 /* ChessBoard.m in Sources */,
+				57629F131716667F00FAD354 /* BoardSquare.m in Sources */,
+				57629F16171667D300FAD354 /* ChessBoardView.m in Sources */,
+				57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +396,7 @@
 				57629EFA1716501500FAD354 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
