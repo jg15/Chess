@@ -9,22 +9,29 @@
 #import "ChessBoard.h"
 #import "BoardNavigationFunctions.h"
 
-@interface ChessBoard ()
-- (BOOL)canMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow withNavigationFunction:(BoardNavigationFunction)navigationFunction;
-@end
-
 @implementation ChessBoard{
-	BOOL whiteKingMoved;
-	BOOL blackKingMoved;
+	struct{
+		BOOL whiteKingMoved;
+		BOOL whiteLeftRookMoved;
+		BOOL whiteRightRookMoved;
+		BOOL blackKingMoved;
+		BOOL blackLeftRookMoved;
+		BOOL blackRightRookMoved;
+	}castling;
 	struct{
 		BOOL available;
 		NSInteger column;
 		NSInteger row;
 	}un_passant;
+	struct{
+		NSInteger column;
+		NSInteger row;
+	}_newPieceLocation;
 }
 
 - (id)init{
     if (self = [super init]) {
+		//_delegate=self;
         [self commonInit];
         [self setToInitialState];
     }
@@ -32,8 +39,12 @@
 }
 
 - (void)commonInit{
-	whiteKingMoved=NO;
-	blackKingMoved=NO;
+	castling.whiteKingMoved=NO;
+	castling.whiteLeftRookMoved=NO;
+	castling.whiteRightRookMoved=NO;
+	castling.blackKingMoved=NO;
+	castling.blackLeftRookMoved=NO;
+	castling.blackRightRookMoved=NO;
 	un_passant.available=NO;
 }
 
@@ -70,7 +81,7 @@
 	_blackScore=0;
 	
 	// White moves first
-	_currentPlayer = PlayerTurnWhite;
+	self.currentPlayer = PlayerTurnWhite;
 }
 
 - (BOOL)willKingBeInCheckInSquareOfColumn:(NSInteger)column andRow:(NSInteger)row{
@@ -85,12 +96,19 @@
 	BoardCellState piece = [super cellStateAtColumn:fromColumn andRow:fromRow];
 	BoardCellState toSquareState = [super cellStateAtColumn:toColumn andRow:toRow];
 	
+	// Only let player of current turn move
+	if(piece>0&&piece<=6&&self.currentPlayer==PlayerTurnWhite){
+		return NO;
+	}else if(piece>=7&&self.currentPlayer==PlayerTurnBlack){
+		return NO;
+	}
+	
 	if(piece==BoardCellStateBlackKing||piece==BoardCellStateWhiteKing){
 		// King
 		if(piece==BoardCellStateBlackKing){
 			if(toSquareState<=6&&toSquareState!=0)return NO;
 			// Castling
-			if(!blackKingMoved&&(toColumn==2||toColumn==6)&&toRow==0){
+			if(!castling.blackKingMoved&&((toColumn==2&&!castling.blackLeftRookMoved)||(toColumn==6&&!castling.blackRightRookMoved))&&toRow==0){
 				if(fromColumn<toColumn){
 					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:BoardNavigationFunctionRight])return YES;
 				}else{
@@ -101,7 +119,7 @@
 		}else if(piece==BoardCellStateWhiteKing){
 			if(toSquareState>=7)return NO;
 			// Castling
-			if(!whiteKingMoved&&(toColumn==2||toColumn==6)&&toRow==7){
+			if(!castling.whiteKingMoved&&((toColumn==2&&!castling.whiteRightRookMoved)||(toColumn==6&&!castling.whiteLeftRookMoved))&&toRow==7){
 				if(fromColumn<toColumn){
 					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:BoardNavigationFunctionRight])return YES;
 				}else{
@@ -220,11 +238,48 @@
 	[super setCellState:piece forColumn:toColumn andRow:toRow];
 	[super setCellState:BoardCellStateEmpty forColumn:fromColumn andRow:fromRow];
 	
-	// TODO: GET NEW PIECE WHEN PAWN REACHES END
+	// Get New Piece When Pawn Reaches The End
+	if(piece==BoardCellStateBlackPawn||piece==BoardCellStateWhitePawn){
+		if(toRow==0||toRow==7){
+			_newPieceLocation.column=toColumn;
+			_newPieceLocation.row=toRow;
+			if([self.delegate respondsToSelector:@selector(requestPieceChoise:)])
+				[self.delegate requestPieceChoise:self];
+			else
+				[NSException raise:NSInternalInconsistencyException format:@"Required Delegate Not Implemented"];
+		}
+	}
 	
 	// Once the king has moved, don't allow castling
-	if(piece==BoardCellStateBlackKing)blackKingMoved=YES;
-	if(piece==BoardCellStateWhiteKing)whiteKingMoved=YES;
+	if(piece==BoardCellStateBlackKing)castling.blackKingMoved=YES;
+	if(piece==BoardCellStateWhiteKing)castling.whiteKingMoved=YES;
+	
+	// Once Rook has moved, don't allow castling with it
+	if(piece==BoardCellStateBlackRook){
+		if(fromColumn==0&&fromRow==0){
+			castling.blackRightRookMoved=YES;
+		}else if(fromColumn==7&&fromRow==0){
+			castling.blackLeftRookMoved=YES;
+		}
+	}
+	if(piece==BoardCellStateWhiteRook){
+		if(fromColumn==0&&fromRow==7){
+			castling.whiteLeftRookMoved=YES;
+		}else if(fromColumn==7&&fromRow==7){
+			castling.whiteRightRookMoved=YES;
+		}
+	}
+	
+	// Castling
+	if(piece==BoardCellStateBlackKing||piece==BoardCellStateWhiteKing){
+		if(abs(toColumn-fromColumn)==2){
+			NSLog(@"CASTLE!");
+			if(piece==BoardCellStateBlackKing&&fromColumn>toColumn)[self makeMoveFromColumn:0 andRow:0 toColumn:3 andRow:0];
+			if(piece==BoardCellStateBlackKing&&fromColumn<toColumn)[self makeMoveFromColumn:7 andRow:0 toColumn:5 andRow:0];
+			if(piece==BoardCellStateWhiteKing&&fromColumn>toColumn)[self makeMoveFromColumn:0 andRow:7 toColumn:3 andRow:7];
+			if(piece==BoardCellStateWhiteKing&&fromColumn<toColumn)[self makeMoveFromColumn:7 andRow:7 toColumn:5 andRow:7];
+		}
+	}
 	
 	// Un Passant Taking
 	if(un_passant.available&&(piece==BoardCellStateWhitePawn||piece==BoardCellStateBlackPawn)&&toColumn==un_passant.column&&toRow==un_passant.row){
@@ -270,7 +325,12 @@
 	}
 	
 	// change player turn
-	_currentPlayer = !_currentPlayer;
+	//self.currentPlayer = !self.currentPlayer;
+}
+
+- (void)setCurrentPlayer:(PlayerTurnState)currentPlayer{
+	_currentPlayer=currentPlayer;
+	[super informDelegateOfPlayerTurnChanged:currentPlayer];
 }
 
 - (void)selectedSquareOfColumn:(NSInteger)column andRow:(NSInteger)row{
@@ -310,6 +370,42 @@
     }
 	
     return YES;
+}
+
+- (void)newPieceChosen:(NSInteger)piece{
+	BoardCellState state;
+	if(_newPieceLocation.row==0){ // White
+		switch (piece) {
+			case 0:
+				state=BoardCellStateWhiteQueen;
+				break;
+			case 1:
+				state=BoardCellStateWhiteRook;
+				break;
+			case 2:
+				state=BoardCellStateWhiteBishop;
+				break;
+			case 3:
+				state=BoardCellStateWhiteKnight;
+				break;
+		}
+	}else{ // Black
+		switch (piece) {
+			case 0:
+				state=BoardCellStateBlackQueen;
+				break;
+			case 1:
+				state=BoardCellStateBlackRook;
+				break;
+			case 2:
+				state=BoardCellStateBlackBishop;
+				break;
+			case 3:
+				state=BoardCellStateBlackKnight;
+				break;
+		}
+	}
+	[super setCellState:state forColumn:_newPieceLocation.column andRow:_newPieceLocation.row];
 }
 
 @end

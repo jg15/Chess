@@ -16,6 +16,7 @@
 	int _row;
 	int _column;
 	ChessBoard *_board;
+	PlayerTurnState _playerTurn;
 }
 
 - (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(ChessBoard *)board
@@ -26,6 +27,7 @@
 		_row = row;
 		_column = column;
 		_board = board;
+		_playerTurn = _board.currentPlayer;
 		
 		// Create (blank) Views for pieces:
 		
@@ -34,8 +36,8 @@
 		self.pieceView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 		[self addSubview:self.pieceView];
 		
-		[self update];
 		[_board.boardDelegate addDelegate:self];
+		[self update];
 		
 		// add tap recognizer
 		UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
@@ -45,8 +47,13 @@
 }
 
 - (void)update{
-	BoardCellState state = [_board cellStateAtColumn:_column andRow:_row];
-
+	BoardCellState state;
+	if(_playerTurn==PlayerTurnBlack){
+		state = [_board cellStateAtColumn:7-_column andRow:7-_row];
+	}else{
+		state = [_board cellStateAtColumn:_column andRow:_row];
+	}
+	
 	NSArray *imageFileNames = @[@"blank",@"blackKing",@"blackQueen",@"blackRook",@"blackBishop",@"blackKnight",@"blackPawn",@"whiteKing",@"whiteQueen",@"whiteRook",@"whiteBishop",@"whiteKnight",@"whitePawn"];
 	
 	self.pieceView.image = [UIImage imageNamed:
@@ -56,14 +63,31 @@
 }
 
 - (void)cellStateChanged:(BoardCellState)state forColumn:(NSInteger)column andRow:(NSInteger)row{
-	if((column==_column&&row==_row)||(column==-1&&row==-1)){
+	if(column==-1&&row==-1){
+		[self update];
+		return;
+	}
+	if(_playerTurn==PlayerTurnBlack&&(column==7-_column&&row==7-_row)){
+		[self update];
+	}else if(column==_column&&row==_row){
 		[self update];
 	}
+	//(column==_column&&row==_row)||
+}
+
+- (void)playerTurnChanged:(PlayerTurnState)player{
+	_playerTurn=player;
+	[self update];
 }
 
 - (void)cellTapped:(UITapGestureRecognizer *)recognizer{
 	NSLog(@"tap");
-	[_board selectedSquareOfColumn:_column andRow:_row];
+	
+	if(_playerTurn==PlayerTurnBlack){
+		[_board selectedSquareOfColumn:7-_column andRow:7-_row];
+	}else{
+		[_board selectedSquareOfColumn:_column andRow:_row];
+	}
 }
 
 /*

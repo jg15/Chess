@@ -18,6 +18,19 @@
                                     <constraint firstAttribute="height" constant="320" id="DuA-QV-QjN"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baw-iD-Tz3">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Alert">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="alert:" destination="2" eventType="touchUpInside" id="VrA-lp-Dpo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -25,6 +38,8 @@
                             <constraint firstItem="4pt-KF-QES" firstAttribute="centerY" secondItem="haw-7n-hv3" secondAttribute="centerY" type="default" id="3t6-yd-U6m"/>
                             <constraint firstItem="4pt-KF-QES" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" type="default" id="5tq-5l-F3a"/>
                             <constraint firstItem="4pt-KF-QES" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="6Zt-fZ-mWt"/>
+                            <constraint firstItem="4pt-KF-QES" firstAttribute="top" secondItem="baw-iD-Tz3" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="9gr-c4-veR"/>
+                            <constraint firstItem="baw-iD-Tz3" firstAttribute="centerX" secondItem="4pt-KF-QES" secondAttribute="centerX" type="default" id="FJK-TJ-Enw"/>
                             <constraint firstItem="haw-7n-hv3" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="QLA-Ji-1B4"/>
                             <constraint firstItem="haw-7n-hv3" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="fKP-Z2-SgD"/>
                             <constraint firstItem="4pt-KF-QES" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="yf1-Ui-KYl"/>
@@ -40,6 +55,18 @@
             <point key="canvasLocation" x="33" y="161"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="ChessViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChessViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="boardImage" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

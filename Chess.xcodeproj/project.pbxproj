@@ -58,6 +58,7 @@
 		57629F121716667F00FAD354 /* BoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquare.h; path = Chess/BoardSquare.h; sourceTree = "<group>"; };
 		57629F14171667D300FAD354 /* ChessBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardView.h; sourceTree = "<group>"; };
 		57629F15171667D300FAD354 /* ChessBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardView.m; sourceTree = "<group>"; };
+		57932EA7171BA9AF0023F05E /* RequestUserInputDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestUserInputDelegate.h; sourceTree = "<group>"; };
 		57AA91D31717CBB300337E28 /* BoardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardDelegate.h; sourceTree = "<group>"; };
 		57AA91D51717CCCC00337E28 /* MulticastDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
 		57AA91D61717CCCC00337E28 /* MulticastDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
@@ -152,8 +153,9 @@
 		57629F041716599500FAD354 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				57B513E4171A84500072B337 /* BoardNavigationFunctions.h */,
+				57932EA7171BA9AF0023F05E /* RequestUserInputDelegate.h */,
 				57AA91D31717CBB300337E28 /* BoardDelegate.h */,
+				57B513E4171A84500072B337 /* BoardNavigationFunctions.h */,
 				57629F001716583200FAD354 /* BoardCellState.h */,
 				57AA91D81717D99A00337E28 /* PlayerTurnState.h */,
 				57629F011716597E00FAD354 /* Board.h */,
@@ -361,6 +363,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
 				INFOPLIST_FILE = "Chess/Chess-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -372,6 +375,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
 				INFOPLIST_FILE = "Chess/Chess-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

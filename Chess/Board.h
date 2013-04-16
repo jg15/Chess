@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "BoardCellState.h"
 #import "MulticastDelegate.h"
+#import "PlayerTurnState.h"
 
 @interface Board : NSObject
 
 @property (readonly) MulticastDelegate *boardDelegate;
+
+- (void)informDelegateOfPlayerTurnChanged:(PlayerTurnState)playerTurn;
 
 - (BoardCellState)cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row;
 

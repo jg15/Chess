@@ -41,17 +41,42 @@
 	
 	// Create board
 	_board = [[ChessBoard alloc] init];
+	_board.delegate = self;
 	
 	// Create view
 	ChessBoardView *chessBoard = [[ChessBoardView alloc] initWithFrame:CGRectMake(0, (self.view.bounds.size.height- self.view.bounds.size.width)*.5, self.view.bounds.size.width, self.view.bounds.size.width) andBoard:_board];
 	[self.view addSubview:chessBoard];
+	
 	//self.backgroundImage.image = [UIImage imageNamed:@"Board.png"];
+	
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)popup{
+	UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Select New Piece:" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Queen", @"Rook", @"Bishop", @"Knight", nil];
+	popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+	[popupQuery showInView:self.view];
+}
+
+- (void)requestPieceChoise:(ChessBoard *)sender{
+	[self popup];
+}
+
+- (IBAction)alert:(UIButton *)sender {
+	[self popup];
+}
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+	if(buttonIndex<0){
+		[self popup];
+	}else{
+		[_board newPieceChosen:buttonIndex];
+	}
+	//NSLog(@"Button #%d clicked",buttonIndex);
 }
 
 @end

@@ -29,6 +29,12 @@
 	}
 }
 
+- (void)informDelegateOfPlayerTurnChanged:(PlayerTurnState)playerTurn{
+	if([_delegate respondsToSelector:@selector(playerTurnChanged:)]){
+		[_delegate playerTurnChanged:playerTurn];
+	}
+}
+
 - (BoardCellState)cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];

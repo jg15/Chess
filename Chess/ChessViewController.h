@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RequestUserInputDelegate.h"
 
-@interface ChessViewController : UIViewController
+@interface ChessViewController : UIViewController <UIActionSheetDelegate,RequestUserInputDelegate>
 
 @end

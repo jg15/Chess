@@ -8,8 +8,11 @@
 
 #import "Board.h"
 #import "PlayerTurnState.h"
+#import "RequestUserInputDelegate.h"
 
 @interface ChessBoard : Board
+
+@property (nonatomic, weak) id<RequestUserInputDelegate> delegate;
 
 @property (readonly) NSInteger whiteScore;
 @property (readonly) NSInteger blackScore;
@@ -23,7 +26,10 @@
 
 - (void)setToInitialState;
 
+- (void)newPieceChosen:(NSInteger)piece;
+
 - (BOOL)isValidMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow;
 - (void)makeMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow;
 - (void)selectedSquareOfColumn:(NSInteger)column andRow:(NSInteger)row;
+
 @end
