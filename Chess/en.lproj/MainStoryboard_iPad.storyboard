@@ -18,29 +18,14 @@
                                     <constraint firstAttribute="height" constant="768" id="MhX-q8-DWU"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k35-vo-aLq">
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="alert:" destination="3kV-i6-PhG" eventType="touchUpInside" id="yLo-SA-Ebd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Hb-D1-U8K" firstAttribute="centerY" secondItem="3rn-ZO-bWR" secondAttribute="centerY" type="default" id="3CB-gU-tfQ"/>
                             <constraint firstItem="6Hb-D1-U8K" firstAttribute="centerY" secondItem="0x3-PJ-Tvm" secondAttribute="centerY" type="default" id="G2K-lY-Cfz"/>
                             <constraint firstItem="3rn-ZO-bWR" firstAttribute="top" secondItem="0x3-PJ-Tvm" secondAttribute="top" type="default" id="Myb-sL-mzr"/>
-                            <constraint firstItem="k35-vo-aLq" firstAttribute="centerX" secondItem="6Hb-D1-U8K" secondAttribute="centerX" type="default" id="NJK-hC-kBX"/>
                             <constraint firstItem="6Hb-D1-U8K" firstAttribute="leading" secondItem="0x3-PJ-Tvm" secondAttribute="leading" type="default" id="cJP-b9-5i9"/>
                             <constraint firstItem="6Hb-D1-U8K" firstAttribute="trailing" secondItem="0x3-PJ-Tvm" secondAttribute="trailing" type="default" id="daV-cE-uxt"/>
-                            <constraint firstItem="k35-vo-aLq" firstAttribute="top" secondItem="0x3-PJ-Tvm" secondAttribute="top" constant="41" id="fND-Wj-cAR"/>
                             <constraint firstItem="3rn-ZO-bWR" firstAttribute="trailing" secondItem="0x3-PJ-Tvm" secondAttribute="trailing" type="default" id="n57-9S-uUc"/>
                             <constraint firstItem="3rn-ZO-bWR" firstAttribute="leading" secondItem="0x3-PJ-Tvm" secondAttribute="leading" type="default" id="oLw-8b-WRv"/>
                         </constraints>
@@ -56,19 +41,6 @@
             <point key="canvasLocation" x="-63" y="-165"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="ChessViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChessViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="alert:" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="backgroundImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="boardImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

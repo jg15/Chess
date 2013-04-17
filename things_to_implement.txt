@@ -1,0 +1,52 @@
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    CGFloat dotDiameter = 30.f;
+    CGFloat dotRadius = dotDiameter * 0.5;
+    CGRect dotRect = CGRectMake(CGRectGetMidX(self.view.frame) - dotRadius,
+                                CGRectGetMidY(self.view.frame) - dotRadius,
+                                dotDiameter, dotDiameter);
+
+    CALayer *dotLayer = [CALayer layer];
+    dotLayer.contents = (id)[self dotImageOfDiameter:dotDiameter].CGImage;
+    dotLayer.cornerRadius = dotRadius;
+    dotLayer.frame = dotRect;
+    dotLayer.masksToBounds = YES;
+
+    // Animate the dot to make it appear to pulsate.
+    CABasicAnimation *pulseAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    pulseAnimation.autoreverses = YES;
+    pulseAnimation.duration = 0.8;
+    pulseAnimation.fromValue = [NSNumber numberWithFloat:0.0f];
+    pulseAnimation.repeatCount = INFINITY;
+    pulseAnimation.toValue = [NSNumber numberWithFloat:1.0f];
+    [dotLayer addAnimation:pulseAnimation forKey:@"opacity"];
+
+    [self.view.layer addSublayer:dotLayer];
+}
+
+- (UIImage *)dotImageOfDiameter:(CGFloat)diameter
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(diameter, diameter), NO, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGFloat radius = diameter * 0.5;
+    CGColorSpaceRef baseColorSpace = CGColorSpaceCreateDeviceRGB();
+    CGFloat colours[8] = { 0.56f, 0.78f, 0.94f, 1.0f,     // Opaque dot colour.
+                        0.56f, 0.78f, 0.94f, 0.0f };      // Transparent dot colour.
+    CGGradientRef gradient = CGGradientCreateWithColorComponents (baseColorSpace, colours, NULL, 2);
+
+    CGContextDrawRadialGradient(context, gradient, CGPointMake(radius, radius), 0.0f, CGPointMake(radius, radius), radius, kCGGradientDrawsAfterEndLocation);
+
+    CGImageRef dotImageRef = CGBitmapContextCreateImage(context);
+    UIImage *dotImage = [UIImage imageWithCGImage:dotImageRef];
+
+    CGColorSpaceRelease(baseColorSpace);
+    CGGradientRelease(gradient);
+    CGImageRelease(dotImageRef);
+
+    UIGraphicsEndImageContext();
+
+    return dotImage;
+}

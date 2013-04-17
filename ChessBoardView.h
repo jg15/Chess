@@ -11,6 +11,8 @@
 
 @interface ChessBoardView : UIView
 
+@property (nonatomic, strong) NSMutableArray *squares; // test as readonly
+
 - (id)initWithFrame:(CGRect)frame andBoard:(ChessBoard *)board;
 
 @end

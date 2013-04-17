@@ -8,18 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "BoardCellState.h"
-#import "MulticastDelegate.h"
-#import "PlayerTurnState.h"
+//#import "MulticastDelegate.h"
+//#import "PlayerTurnState.h"
+#import "BoardCoordinateTypes.h"
+#import "BoardDelegate.h"
 
 @interface Board : NSObject
 
-@property (readonly) MulticastDelegate *boardDelegate;
+//@property (readonly) MulticastDelegate *boardDelegate;
 
-- (void)informDelegateOfPlayerTurnChanged:(PlayerTurnState)playerTurn;
+@property (nonatomic, weak) id<BoardDelegate> boardDelegate;
 
-- (BoardCellState)cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row;
+- (BoardCellState)cellStateAtCoordinates:(BoardCoordinates)coordinates;
 
-- (void)setCellState:(BoardCellState)state forColumn:(NSUInteger)column andRow:(NSUInteger)row;
+- (void)setCellState:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
 
 - (void)clearBoard;
 

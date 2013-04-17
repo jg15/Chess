@@ -7,8 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RequestUserInputDelegate.h"
+#import "PlayerTurnState.h"
+#import "BoardSquareViewDelegate.h"
+#import "BoardDelegate.h"
 
-@interface ChessViewController : UIViewController <UIActionSheetDelegate,RequestUserInputDelegate>
+@interface ChessViewController : UIViewController <UIActionSheetDelegate,BoardSquareViewDelegate,BoardDelegate>{
+	PlayerTurnState _playerTurn;
+}
+
+@property (readonly) struct{
+	BOOL isset;
+	NSInteger column;
+	NSInteger row;
+}firsttap;
+
 
 @end

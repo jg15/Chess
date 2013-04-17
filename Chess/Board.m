@@ -7,57 +7,60 @@
 //
 
 #import "Board.h"
-#import "BoardDelegate.h"
+
+@interface Board ()
+
+
+@end
 
 @implementation Board{
 	NSUInteger _board[8][8];
-	id<BoardDelegate> _delegate;
 }
 
 - (id)init{
 	if(self=[super init]){
 		[self clearBoard];
-		_boardDelegate = [[MulticastDelegate alloc] init];
-		_delegate = (id)_boardDelegate;
+		//_boardDelegate = [[MulticastDelegate alloc] init];
+		//self.delegate = (id)self.boardDelegate;
 	}
 	return self;
 }
-
-- (void)informDelegateOfStateChanged:(BoardCellState)state forColumn:(NSInteger)column andRow:(NSInteger)row{
-	if([_delegate respondsToSelector:@selector(cellStateChanged:forColumn:andRow:)]){
-		[_delegate cellStateChanged:state forColumn:column andRow:row];
+/*
+- (void)informDelegateOfStateChanged:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates{
+	if([self.delegate respondsToSelector:@selector(cellStateChanged:forCoordinates:)]){
+		[self.delegate cellStateChanged:state forCoordinates:coordinates];
 	}
 }
 
 - (void)informDelegateOfPlayerTurnChanged:(PlayerTurnState)playerTurn{
-	if([_delegate respondsToSelector:@selector(playerTurnChanged:)]){
-		[_delegate playerTurnChanged:playerTurn];
+	if([self.delegate respondsToSelector:@selector(playerTurnChanged:)]){
+		[self.delegate playerTurnChanged:playerTurn];
 	}
 }
-
-- (BoardCellState)cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row
+*/
+- (BoardCellState)cellStateAtCoordinates:(BoardCoordinates)coordinates
 {
-    [self checkBoundsForColumn:column andRow:row];
-    return _board[column][row];
+    [self checkBoundsForCoordinates:coordinates];
+    return _board[coordinates.column][coordinates.row];
 }
 
-- (void)setCellState:(BoardCellState)state forColumn:(NSUInteger)column andRow:(NSUInteger)row
-{
-    [self checkBoundsForColumn:column andRow:row];
-    _board[column][row] = state;
-	[self informDelegateOfStateChanged:state forColumn:column andRow:row];
+- (void)setCellState:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates{
+    [self checkBoundsForCoordinates:coordinates];
+    _board[coordinates.column][coordinates.row] = state;
+	[self.boardDelegate cellStateChanged:state forCoordinates:coordinates];
+	//[self informDelegateOfStateChanged:state forCoordinates:coordinates];
 }
 
-- (void)checkBoundsForColumn:(NSInteger)column andRow:(NSInteger)row
+- (void)checkBoundsForCoordinates:(BoardCoordinates)coordinates
 {
-    if (column<0||column>7||row<0||row>7){
+    if (coordinates.column<0||coordinates.column>7||coordinates.row<0||coordinates.row>7){
 		[NSException raise:NSRangeException format:@"row or column out of bounds"];
 	}
 }
 
 - (void)clearBoard{
 	memset(_board, 0, sizeof(NSUInteger)*8*8);
-	[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
+	//[self informDelegateOfStateChanged:BoardCellStateEmpty forCoordinates:(BoardCoordinates){-1,-1}];
 }
 
 @end

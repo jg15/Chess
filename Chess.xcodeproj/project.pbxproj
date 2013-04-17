@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572CB27B171CD82100560AA6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 572CB27A171CD82100560AA6 /* QuartzCore.framework */; };
 		57629ED61716501500FAD354 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED51716501500FAD354 /* UIKit.framework */; };
 		57629ED81716501500FAD354 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED71716501500FAD354 /* Foundation.framework */; };
 		57629EDA1716501500FAD354 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57629ED91716501500FAD354 /* CoreGraphics.framework */; };
@@ -23,13 +24,17 @@
 		57629F0817165DBD00FAD354 /* ChessBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F0717165DBD00FAD354 /* ChessBoard.m */; };
 		57629F0A1716606100FAD354 /* Board(old).png in Resources */ = {isa = PBXBuildFile; fileRef = 57629F091716606000FAD354 /* Board(old).png */; };
 		57629F101716661000FAD354 /* Pieces in Resources */ = {isa = PBXBuildFile; fileRef = 57629F0F1716661000FAD354 /* Pieces */; };
-		57629F131716667F00FAD354 /* BoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F111716667F00FAD354 /* BoardSquare.m */; };
+		57629F131716667F00FAD354 /* BoardSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F111716667F00FAD354 /* BoardSquareView.m */; };
 		57629F16171667D300FAD354 /* ChessBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F15171667D300FAD354 /* ChessBoardView.m */; };
 		57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AA91D61717CCCC00337E28 /* MulticastDelegate.m */; };
 		57B513E2171A2FB70072B337 /* Board.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B513E1171A2FB70072B337 /* Board.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		572CB27A171CD82100560AA6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		572CB27C171CDB9300560AA6 /* things_to_implement.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = things_to_implement.txt; sourceTree = "<group>"; };
+		572CB288171CF7A500560AA6 /* BoardCoordinateTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCoordinateTypes.h; sourceTree = "<group>"; };
+		572CB289171CFFEC00560AA6 /* BoardSquareViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardSquareViewDelegate.h; sourceTree = "<group>"; };
 		57629ED21716501500FAD354 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57629ED51716501500FAD354 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		57629ED71716501500FAD354 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,8 +59,8 @@
 		57629F0717165DBD00FAD354 /* ChessBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoard.m; sourceTree = "<group>"; };
 		57629F091716606000FAD354 /* Board(old).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Board(old).png"; sourceTree = "<group>"; };
 		57629F0F1716661000FAD354 /* Pieces */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pieces; sourceTree = "<group>"; };
-		57629F111716667F00FAD354 /* BoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquare.m; path = Chess/BoardSquare.m; sourceTree = "<group>"; };
-		57629F121716667F00FAD354 /* BoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquare.h; path = Chess/BoardSquare.h; sourceTree = "<group>"; };
+		57629F111716667F00FAD354 /* BoardSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardSquareView.m; path = Chess/BoardSquareView.m; sourceTree = "<group>"; };
+		57629F121716667F00FAD354 /* BoardSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardSquareView.h; path = Chess/BoardSquareView.h; sourceTree = "<group>"; };
 		57629F14171667D300FAD354 /* ChessBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardView.h; sourceTree = "<group>"; };
 		57629F15171667D300FAD354 /* ChessBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessBoardView.m; sourceTree = "<group>"; };
 		57932EA7171BA9AF0023F05E /* RequestUserInputDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestUserInputDelegate.h; sourceTree = "<group>"; };
@@ -72,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572CB27B171CD82100560AA6 /* QuartzCore.framework in Frameworks */,
 				57629ED61716501500FAD354 /* UIKit.framework in Frameworks */,
 				57629ED81716501500FAD354 /* Foundation.framework in Frameworks */,
 				57629EDA1716501500FAD354 /* CoreGraphics.framework in Frameworks */,
@@ -84,6 +90,7 @@
 		57629EC91716501500FAD354 = {
 			isa = PBXGroup;
 			children = (
+				572CB27C171CDB9300560AA6 /* things_to_implement.txt */,
 				57629EDB1716501500FAD354 /* Chess */,
 				57629ED41716501500FAD354 /* Frameworks */,
 				57629ED31716501500FAD354 /* Products */,
@@ -101,6 +108,7 @@
 		57629ED41716501500FAD354 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				572CB27A171CD82100560AA6 /* QuartzCore.framework */,
 				57629ED51716501500FAD354 /* UIKit.framework */,
 				57629ED71716501500FAD354 /* Foundation.framework */,
 				57629ED91716501500FAD354 /* CoreGraphics.framework */,
@@ -153,11 +161,12 @@
 		57629F041716599500FAD354 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				572CB288171CF7A500560AA6 /* BoardCoordinateTypes.h */,
+				57AA91D81717D99A00337E28 /* PlayerTurnState.h */,
+				57629F001716583200FAD354 /* BoardCellState.h */,
 				57932EA7171BA9AF0023F05E /* RequestUserInputDelegate.h */,
 				57AA91D31717CBB300337E28 /* BoardDelegate.h */,
 				57B513E4171A84500072B337 /* BoardNavigationFunctions.h */,
-				57629F001716583200FAD354 /* BoardCellState.h */,
-				57AA91D81717D99A00337E28 /* PlayerTurnState.h */,
 				57629F011716597E00FAD354 /* Board.h */,
 				57629F021716597E00FAD354 /* Board.m */,
 				57629F0617165DBD00FAD354 /* ChessBoard.h */,
@@ -169,8 +178,9 @@
 		57629F0B1716608600FAD354 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				57629F121716667F00FAD354 /* BoardSquare.h */,
-				57629F111716667F00FAD354 /* BoardSquare.m */,
+				572CB289171CFFEC00560AA6 /* BoardSquareViewDelegate.h */,
+				57629F121716667F00FAD354 /* BoardSquareView.h */,
+				57629F111716667F00FAD354 /* BoardSquareView.m */,
 				57629F14171667D300FAD354 /* ChessBoardView.h */,
 				57629F15171667D300FAD354 /* ChessBoardView.m */,
 			);
@@ -263,7 +273,7 @@
 				57629EF51716501500FAD354 /* ChessViewController.m in Sources */,
 				57629F031716597E00FAD354 /* Board.m in Sources */,
 				57629F0817165DBD00FAD354 /* ChessBoard.m in Sources */,
-				57629F131716667F00FAD354 /* BoardSquare.m in Sources */,
+				57629F131716667F00FAD354 /* BoardSquareView.m in Sources */,
 				57629F16171667D300FAD354 /* ChessBoardView.m in Sources */,
 				57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */,
 			);
@@ -324,7 +334,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -349,7 +359,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

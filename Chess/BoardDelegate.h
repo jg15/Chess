@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "BoardCellState.h"
-#import "PlayerTurnState.h"
+#import "BoardCoordinateTypes.h"
 
 @protocol BoardDelegate <NSObject>
-- (void)cellStateChanged:(BoardCellState)state forColumn:(int)column andRow:(int)row;
-- (void)playerTurnChanged:(PlayerTurnState)player;
+- (void)cellStateChanged:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
 @end

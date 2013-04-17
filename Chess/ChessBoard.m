@@ -23,10 +23,6 @@
 		NSInteger column;
 		NSInteger row;
 	}un_passant;
-	struct{
-		NSInteger column;
-		NSInteger row;
-	}_newPieceLocation;
 }
 
 - (id)init{
@@ -53,35 +49,35 @@
 	
 	// Initialize Board
 	
-	[super setCellState:BoardCellStateWhiteRook forColumn:0 andRow:7];
-	[super setCellState:BoardCellStateWhiteKnight forColumn:1 andRow:7];
-	[super setCellState:BoardCellStateWhiteBishop forColumn:2 andRow:7];
-	[super setCellState:BoardCellStateWhiteQueen forColumn:3 andRow:7];
-	[super setCellState:BoardCellStateWhiteKing forColumn:4 andRow:7];
-	[super setCellState:BoardCellStateWhiteBishop forColumn:5 andRow:7];
-	[super setCellState:BoardCellStateWhiteKnight forColumn:6 andRow:7];
-	[super setCellState:BoardCellStateWhiteRook forColumn:7 andRow:7];
+	[super setCellState:BoardCellStateWhiteRook forCoordinates:(BoardCoordinates){0, 7}];
+	[super setCellState:BoardCellStateWhiteKnight forCoordinates:(BoardCoordinates){1, 7}];
+	[super setCellState:BoardCellStateWhiteBishop forCoordinates:(BoardCoordinates){2, 7}];
+	[super setCellState:BoardCellStateWhiteQueen forCoordinates:(BoardCoordinates){3, 7}];
+	[super setCellState:BoardCellStateWhiteKing forCoordinates:(BoardCoordinates){4, 7}];
+	[super setCellState:BoardCellStateWhiteBishop forCoordinates:(BoardCoordinates){5, 7}];
+	[super setCellState:BoardCellStateWhiteKnight forCoordinates:(BoardCoordinates){6, 7}];
+	[super setCellState:BoardCellStateWhiteRook forCoordinates:(BoardCoordinates){7, 7}];
 	for(int i=0;i<8;i++){
-		[super setCellState:BoardCellStateWhitePawn forColumn:i andRow:6];
+		[super setCellState:BoardCellStateWhitePawn forCoordinates:(BoardCoordinates){i, 6}];
 	}
 	
-	[super setCellState:BoardCellStateBlackRook forColumn:0 andRow:0];
-	[super setCellState:BoardCellStateBlackKnight forColumn:1 andRow:0];
-	[super setCellState:BoardCellStateBlackBishop forColumn:2 andRow:0];
-	[super setCellState:BoardCellStateBlackQueen forColumn:3 andRow:0];
-	[super setCellState:BoardCellStateBlackKing forColumn:4 andRow:0];
-	[super setCellState:BoardCellStateBlackBishop forColumn:5 andRow:0];
-	[super setCellState:BoardCellStateBlackKnight forColumn:6 andRow:0];
-	[super setCellState:BoardCellStateBlackRook forColumn:7 andRow:0];
+	[super setCellState:BoardCellStateBlackRook forCoordinates:(BoardCoordinates){0, 0}];
+	[super setCellState:BoardCellStateBlackKnight forCoordinates:(BoardCoordinates){1, 0}];
+	[super setCellState:BoardCellStateBlackBishop forCoordinates:(BoardCoordinates){2, 0}];
+	[super setCellState:BoardCellStateBlackQueen forCoordinates:(BoardCoordinates){3, 0}];
+	[super setCellState:BoardCellStateBlackKing forCoordinates:(BoardCoordinates){4, 0}];
+	[super setCellState:BoardCellStateBlackBishop forCoordinates:(BoardCoordinates){5, 0}];
+	[super setCellState:BoardCellStateBlackKnight forCoordinates:(BoardCoordinates){6, 0}];
+	[super setCellState:BoardCellStateBlackRook forCoordinates:(BoardCoordinates){7, 0}];
 	for(int i=0;i<8;i++){
-		[super setCellState:BoardCellStateBlackPawn forColumn:i andRow:1];
+		[super setCellState:BoardCellStateBlackPawn forCoordinates:(BoardCoordinates){i, 1}];
 	}
 	
 	_whiteScore=0;
 	_blackScore=0;
 	
 	// White moves first
-	self.currentPlayer = PlayerTurnWhite;
+	//self.currentPlayer = PlayerTurnWhite;
 }
 
 - (BOOL)willKingBeInCheckInSquareOfColumn:(NSInteger)column andRow:(NSInteger)row{
@@ -89,47 +85,46 @@
 	return NO;
 }
 
-- (BOOL)isValidMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow{
+- (BOOL)isValidMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates{
 	// check for valid move
-	NSLog(@"check");
 	
-	BoardCellState piece = [super cellStateAtColumn:fromColumn andRow:fromRow];
-	BoardCellState toSquareState = [super cellStateAtColumn:toColumn andRow:toRow];
+	BoardCellState piece = [super cellStateAtCoordinates:fromCoordinates];
+	BoardCellState toSquareState = [super cellStateAtCoordinates:toCoordinates];
 	
 	// Only let player of current turn move
-	if(piece>0&&piece<=6&&self.currentPlayer==PlayerTurnWhite){
+	/*if(piece>0&&piece<=6&&playerTurn==PlayerTurnWhite){
 		return NO;
-	}else if(piece>=7&&self.currentPlayer==PlayerTurnBlack){
+	}else if(piece>=7&&playerTurn==PlayerTurnBlack){
 		return NO;
-	}
+	}*/
 	
 	if(piece==BoardCellStateBlackKing||piece==BoardCellStateWhiteKing){
 		// King
 		if(piece==BoardCellStateBlackKing){
 			if(toSquareState<=6&&toSquareState!=0)return NO;
 			// Castling
-			if(!castling.blackKingMoved&&((toColumn==2&&!castling.blackLeftRookMoved)||(toColumn==6&&!castling.blackRightRookMoved))&&toRow==0){
-				if(fromColumn<toColumn){
-					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:BoardNavigationFunctionRight])return YES;
+			if(!castling.blackKingMoved&&((toCoordinates.column==2&&!castling.blackLeftRookMoved)||(toCoordinates.column==6&&!castling.blackRightRookMoved))&&toCoordinates.row==0){
+				if(fromCoordinates.column<toCoordinates.column){
+					if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:BoardNavigationFunctionRight])return YES;
 				}else{
-					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn-2 andRow:toRow withNavigationFunction:BoardNavigationFunctionLeft])return YES;
+					if([self canMovefromCoordinates:fromCoordinates toCoordinates:(BoardCoordinates){toCoordinates.column-2, toCoordinates.row} withNavigationFunction:BoardNavigationFunctionLeft])return YES;
 				}
 				//return YES;
 			}
 		}else if(piece==BoardCellStateWhiteKing){
 			if(toSquareState>=7)return NO;
 			// Castling
-			if(!castling.whiteKingMoved&&((toColumn==2&&!castling.whiteRightRookMoved)||(toColumn==6&&!castling.whiteLeftRookMoved))&&toRow==7){
-				if(fromColumn<toColumn){
-					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:BoardNavigationFunctionRight])return YES;
+			if(!castling.whiteKingMoved&&((toCoordinates.column==2&&!castling.whiteRightRookMoved)||(toCoordinates.column==6&&!castling.whiteLeftRookMoved))&&toCoordinates.row==7){
+				if(fromCoordinates.column<toCoordinates.column){
+					if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:BoardNavigationFunctionRight])return YES;
 				}else{
-					if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn-2 andRow:toRow withNavigationFunction:BoardNavigationFunctionLeft])return YES;
+					if([self canMovefromCoordinates:fromCoordinates toCoordinates:(BoardCoordinates){toCoordinates.column-2, toCoordinates.row} withNavigationFunction:BoardNavigationFunctionLeft])return YES;
 				}
 				//return YES;
 			}
 		}
-		if(abs(fromColumn-toColumn)>1||abs(fromRow-toRow)>1)return NO;
-		return ![self willKingBeInCheckInSquareOfColumn:toColumn andRow:toRow];
+		if(abs(fromCoordinates.column-toCoordinates.column)>1||abs(fromCoordinates.row-toCoordinates.row)>1)return NO;
+		return ![self willKingBeInCheckInSquareOfColumn:toCoordinates.column andRow:toCoordinates.row];
 	}else if(piece==BoardCellStateBlackQueen||piece==BoardCellStateWhiteQueen){
 		// Queen
 		if(piece==BoardCellStateBlackQueen){
@@ -137,17 +132,17 @@
 		}else if(piece==BoardCellStateWhiteQueen){
 			if(toSquareState>=7)return NO;
 		}
-		if(abs(toColumn-fromColumn)!=abs(toRow-fromRow)&&(fromColumn!=toColumn&&fromRow!=toRow))return NO;
+		if(abs(toCoordinates.column-fromCoordinates.column)!=abs(toCoordinates.row-fromCoordinates.row)&&(fromCoordinates.column!=toCoordinates.column&&fromCoordinates.row!=toCoordinates.row))return NO;
 		BoardNavigationFunction bnf;
-		if(toColumn>fromColumn)bnf=BoardNavigationFunctionRight;
-		if(toColumn<fromColumn)bnf=BoardNavigationFunctionLeft;
-		if(toRow<fromRow)bnf=BoardNavigationFunctionUp;
-		if(toRow>fromRow)bnf=BoardNavigationFunctionDown;
-		if(fromColumn<toColumn&&fromRow>toRow)bnf=BoardNavigationFunctionRightUp;
-		if(fromColumn<toColumn&&fromRow<toRow)bnf=BoardNavigationFunctionRightDown;
-		if(fromColumn>toColumn&&fromRow>toRow)bnf=BoardNavigationFunctionLeftUp;
-		if(fromColumn>toColumn&&fromRow<toRow)bnf=BoardNavigationFunctionLeftDown;
-		if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:bnf])return YES;
+		if(toCoordinates.column>fromCoordinates.column)bnf=BoardNavigationFunctionRight;
+		if(toCoordinates.column<fromCoordinates.column)bnf=BoardNavigationFunctionLeft;
+		if(toCoordinates.row<fromCoordinates.row)bnf=BoardNavigationFunctionUp;
+		if(toCoordinates.row>fromCoordinates.row)bnf=BoardNavigationFunctionDown;
+		if(fromCoordinates.column<toCoordinates.column&&fromCoordinates.row>toCoordinates.row)bnf=BoardNavigationFunctionRightUp;
+		if(fromCoordinates.column<toCoordinates.column&&fromCoordinates.row<toCoordinates.row)bnf=BoardNavigationFunctionRightDown;
+		if(fromCoordinates.column>toCoordinates.column&&fromCoordinates.row>toCoordinates.row)bnf=BoardNavigationFunctionLeftUp;
+		if(fromCoordinates.column>toCoordinates.column&&fromCoordinates.row<toCoordinates.row)bnf=BoardNavigationFunctionLeftDown;
+		if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:bnf])return YES;
 	}else if(piece==BoardCellStateBlackRook||piece==BoardCellStateWhiteRook){
 		// Rook
 		if(piece==BoardCellStateBlackRook){
@@ -155,13 +150,13 @@
 		}else if(piece==BoardCellStateWhiteRook){
 			if(toSquareState>=7)return NO;
 		}
-		if(fromColumn!=toColumn&&fromRow!=toRow)return NO;
+		if(fromCoordinates.column!=toCoordinates.column&&fromCoordinates.row!=toCoordinates.row)return NO;
 		BoardNavigationFunction bnf;
-		if(toColumn>fromColumn)bnf=BoardNavigationFunctionRight;
-		if(toColumn<fromColumn)bnf=BoardNavigationFunctionLeft;
-		if(toRow<fromRow)bnf=BoardNavigationFunctionUp;
-		if(toRow>fromRow)bnf=BoardNavigationFunctionDown;
-		if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:bnf])return YES;
+		if(toCoordinates.column>fromCoordinates.column)bnf=BoardNavigationFunctionRight;
+		if(toCoordinates.column<fromCoordinates.column)bnf=BoardNavigationFunctionLeft;
+		if(toCoordinates.row<fromCoordinates.row)bnf=BoardNavigationFunctionUp;
+		if(toCoordinates.row>fromCoordinates.row)bnf=BoardNavigationFunctionDown;
+		if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:bnf])return YES;
 	}else if(piece==BoardCellStateBlackBishop||piece==BoardCellStateWhiteBishop){
 		// Bishop
 		if(piece==BoardCellStateBlackBishop){
@@ -169,13 +164,13 @@
 		}else if(piece==BoardCellStateWhiteBishop){
 			if(toSquareState>=7)return NO;
 		}
-		if(abs(toColumn-fromColumn)!=abs(toRow-fromRow))return NO;
+		if(abs(toCoordinates.column-fromCoordinates.column)!=abs(toCoordinates.row-fromCoordinates.row))return NO;
 		BoardNavigationFunction bnf;
-		if(fromColumn<toColumn&&fromRow>toRow)bnf=BoardNavigationFunctionRightUp;
-		if(fromColumn<toColumn&&fromRow<toRow)bnf=BoardNavigationFunctionRightDown;
-		if(fromColumn>toColumn&&fromRow>toRow)bnf=BoardNavigationFunctionLeftUp;
-		if(fromColumn>toColumn&&fromRow<toRow)bnf=BoardNavigationFunctionLeftDown;
-		if([self canMoveFromColumn:fromColumn andRow:fromRow toColumn:toColumn andRow:toRow withNavigationFunction:bnf])return YES;
+		if(fromCoordinates.column<toCoordinates.column&&fromCoordinates.row>toCoordinates.row)bnf=BoardNavigationFunctionRightUp;
+		if(fromCoordinates.column<toCoordinates.column&&fromCoordinates.row<toCoordinates.row)bnf=BoardNavigationFunctionRightDown;
+		if(fromCoordinates.column>toCoordinates.column&&fromCoordinates.row>toCoordinates.row)bnf=BoardNavigationFunctionLeftUp;
+		if(fromCoordinates.column>toCoordinates.column&&fromCoordinates.row<toCoordinates.row)bnf=BoardNavigationFunctionLeftDown;
+		if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:bnf])return YES;
 	}else if(piece==BoardCellStateBlackKnight||piece==BoardCellStateWhiteKnight){
 		// Knight
 		if(piece==BoardCellStateBlackKnight){
@@ -183,143 +178,147 @@
 		}else if(piece==BoardCellStateWhiteKnight){
 			if(toSquareState>=7)return NO;
 		}
-		if((toRow==fromRow+1||toRow==fromRow-1)&&(toColumn==fromColumn+2||toColumn==fromColumn-2))return YES;
-		if((toRow==fromRow+2||toRow==fromRow-2)&&(toColumn==fromColumn+1||toColumn==fromColumn-1))return YES;
+		if((toCoordinates.row==fromCoordinates.row+1||toCoordinates.row==fromCoordinates.row-1)&&(toCoordinates.column==fromCoordinates.column+2||toCoordinates.column==fromCoordinates.column-2))return YES;
+		if((toCoordinates.row==fromCoordinates.row+2||toCoordinates.row==fromCoordinates.row-2)&&(toCoordinates.column==fromCoordinates.column+1||toCoordinates.column==fromCoordinates.column-1))return YES;
 	}else if(piece==BoardCellStateBlackPawn||piece==BoardCellStateWhitePawn){
 		// Pawn
 		if(piece==BoardCellStateBlackPawn){
 			// Black Pawn
 			if(toSquareState==BoardCellStateEmpty){
 				// Move Forward
-				if(fromColumn==toColumn){
-					if(toRow==fromRow+1)return YES;
-					if(fromRow==1&&toRow==3&&[super cellStateAtColumn:fromColumn andRow:fromRow+1]==BoardCellStateEmpty)return YES;
+				if(fromCoordinates.column==toCoordinates.column){
+					if(toCoordinates.row==fromCoordinates.row+1)return YES;
+					if(fromCoordinates.row==1&&toCoordinates.row==3&&[super cellStateAtCoordinates:(BoardCoordinates){fromCoordinates.column, fromCoordinates.row+1}]==BoardCellStateEmpty)return YES;
 				}
 				// Un Passant
 				if(un_passant.available&&
-					un_passant.column==toColumn&&un_passant.row==fromRow+1&&
-					toRow==fromRow+1&&(toColumn==fromColumn-1||toColumn==fromColumn+1)&&
-						fromRow==4
+					un_passant.column==toCoordinates.column&&un_passant.row==fromCoordinates.row+1&&
+					toCoordinates.row==fromCoordinates.row+1&&(toCoordinates.column==fromCoordinates.column-1||toCoordinates.column==fromCoordinates.column+1)&&
+						fromCoordinates.row==4
 				   )return YES;
 			}else{
 				// Take Piece
-				if(toRow==fromRow+1&&(toColumn==fromColumn-1||toColumn==fromColumn+1)&&toSquareState>=7)return YES;
+				if(toCoordinates.row==fromCoordinates.row+1&&(toCoordinates.column==fromCoordinates.column-1||toCoordinates.column==fromCoordinates.column+1)&&toSquareState>=7)return YES;
 			}
 		}else if(piece==BoardCellStateWhitePawn){
 			// White Pawn
 			if(toSquareState==BoardCellStateEmpty){
 				// Move Forward
-				if(fromColumn==toColumn){
-					if(toRow==fromRow-1)return YES;
-					if(fromRow==6&&toRow==4&&[super cellStateAtColumn:fromColumn andRow:fromRow-1]==BoardCellStateEmpty)return YES;
+				if(fromCoordinates.column==toCoordinates.column){
+					if(toCoordinates.row==fromCoordinates.row-1)return YES;
+					if(fromCoordinates.row==6&&toCoordinates.row==4&&[super cellStateAtCoordinates:(BoardCoordinates){fromCoordinates.column, fromCoordinates.row-1}]==BoardCellStateEmpty)return YES;
 				}
 				// Un Passant
 				if(un_passant.available&&
-				   un_passant.column==toColumn&&un_passant.row==fromRow-1&&
-					toRow==fromRow-1&&(toColumn==fromColumn-1||toColumn==fromColumn+1)&&
-						fromRow==3
+				   un_passant.column==toCoordinates.column&&un_passant.row==fromCoordinates.row-1&&
+					toCoordinates.row==fromCoordinates.row-1&&(toCoordinates.column==fromCoordinates.column-1||toCoordinates.column==fromCoordinates.column+1)&&
+						fromCoordinates.row==3
 				   )return YES;
 			}else{
 				// Take Piece
-				if(toRow==fromRow-1&&(toColumn==fromColumn-1||toColumn==fromColumn+1)&&toSquareState<=6)return YES;
+				if(toCoordinates.row==fromCoordinates.row-1&&(toCoordinates.column==fromCoordinates.column-1||toCoordinates.column==fromCoordinates.column+1)&&toSquareState<=6)return YES;
 			}
 		}
 	}
 	return NO;
 }
 
-- (void)makeMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow{
+- (void)makeMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates{
 	// move piece to given location
-	NSLog(@"Move");
 	
-	BoardCellState piece = [super cellStateAtColumn:fromColumn andRow:fromRow];
+	BoardCellState piece = [super cellStateAtCoordinates:fromCoordinates];
 	
 	// Move piece
-	[super setCellState:piece forColumn:toColumn andRow:toRow];
-	[super setCellState:BoardCellStateEmpty forColumn:fromColumn andRow:fromRow];
-	
+	[super setCellState:piece forCoordinates:toCoordinates];
+	[super setCellState:BoardCellStateEmpty forCoordinates:fromCoordinates];
+	/**********************************************************************************************
 	// Get New Piece When Pawn Reaches The End
 	if(piece==BoardCellStateBlackPawn||piece==BoardCellStateWhitePawn){
-		if(toRow==0||toRow==7){
-			_newPieceLocation.column=toColumn;
-			_newPieceLocation.row=toRow;
-			if([self.delegate respondsToSelector:@selector(requestPieceChoise:)])
+		if(toCoordinates.row==0||toCoordinates.row==7){
+			_newPieceLocation.column=toCoordinates.column;
+			_newPieceLocation.row=toCoordinates.row;
+			if([self.delegate respondsToSelector:@selector(requestPieceChoise:)]){
 				[self.delegate requestPieceChoise:self];
-			else
+			}else{
 				[NSException raise:NSInternalInconsistencyException format:@"Required Delegate Not Implemented"];
+			}
 		}
 	}
-	
+	*/
 	// Once the king has moved, don't allow castling
 	if(piece==BoardCellStateBlackKing)castling.blackKingMoved=YES;
 	if(piece==BoardCellStateWhiteKing)castling.whiteKingMoved=YES;
 	
 	// Once Rook has moved, don't allow castling with it
 	if(piece==BoardCellStateBlackRook){
-		if(fromColumn==0&&fromRow==0){
+		if(fromCoordinates.column==0&&fromCoordinates.row==0){
 			castling.blackRightRookMoved=YES;
-		}else if(fromColumn==7&&fromRow==0){
+		}else if(fromCoordinates.column==7&&fromCoordinates.row==0){
 			castling.blackLeftRookMoved=YES;
 		}
 	}
 	if(piece==BoardCellStateWhiteRook){
-		if(fromColumn==0&&fromRow==7){
+		if(fromCoordinates.column==0&&fromCoordinates.row==7){
 			castling.whiteLeftRookMoved=YES;
-		}else if(fromColumn==7&&fromRow==7){
+		}else if(fromCoordinates.column==7&&fromCoordinates.row==7){
 			castling.whiteRightRookMoved=YES;
 		}
 	}
 	
 	// Castling
 	if(piece==BoardCellStateBlackKing||piece==BoardCellStateWhiteKing){
-		if(abs(toColumn-fromColumn)==2){
+		if(abs(toCoordinates.column-fromCoordinates.column)==2){
 			NSLog(@"CASTLE!");
-			if(piece==BoardCellStateBlackKing&&fromColumn>toColumn)[self makeMoveFromColumn:0 andRow:0 toColumn:3 andRow:0];
-			if(piece==BoardCellStateBlackKing&&fromColumn<toColumn)[self makeMoveFromColumn:7 andRow:0 toColumn:5 andRow:0];
-			if(piece==BoardCellStateWhiteKing&&fromColumn>toColumn)[self makeMoveFromColumn:0 andRow:7 toColumn:3 andRow:7];
-			if(piece==BoardCellStateWhiteKing&&fromColumn<toColumn)[self makeMoveFromColumn:7 andRow:7 toColumn:5 andRow:7];
+			
+			if(piece==BoardCellStateBlackKing&&fromCoordinates.column>toCoordinates.column)[self makeMoveFromCoordinates:(BoardCoordinates){0, 0} toCoordinates:(BoardCoordinates){3, 0}];
+
+			if(piece==BoardCellStateBlackKing&&fromCoordinates.column<toCoordinates.column)[self makeMoveFromCoordinates:(BoardCoordinates){7, 0} toCoordinates:(BoardCoordinates){5, 0}];
+			
+			if(piece==BoardCellStateWhiteKing&&fromCoordinates.column>toCoordinates.column)[self makeMoveFromCoordinates:(BoardCoordinates){0, 7} toCoordinates:(BoardCoordinates){3, 7}];
+			
+			if(piece==BoardCellStateWhiteKing&&fromCoordinates.column<toCoordinates.column)[self makeMoveFromCoordinates:(BoardCoordinates){7, 7} toCoordinates:(BoardCoordinates){5, 7}];
 		}
 	}
 	
 	// Un Passant Taking
-	if(un_passant.available&&(piece==BoardCellStateWhitePawn||piece==BoardCellStateBlackPawn)&&toColumn==un_passant.column&&toRow==un_passant.row){
+	if(un_passant.available&&(piece==BoardCellStateWhitePawn||piece==BoardCellStateBlackPawn)&&toCoordinates.column==un_passant.column&&toCoordinates.row==un_passant.row){
 		if(piece==BoardCellStateBlackPawn){
-			[super setCellState:BoardCellStateEmpty forColumn:un_passant.column andRow:un_passant.row-1];
+			[super setCellState:BoardCellStateEmpty forCoordinates:(BoardCoordinates){un_passant.column, un_passant.row-1}];
 		}else if(piece==BoardCellStateWhitePawn){
-			[super setCellState:BoardCellStateEmpty forColumn:un_passant.column andRow:un_passant.row+1];
+			[super setCellState:BoardCellStateEmpty forCoordinates:(BoardCoordinates){un_passant.column, un_passant.row+1}];
 		}
 	}
 	
 	// Un Passant Availability
 	un_passant.available=NO; // reset availability
-	if(piece==BoardCellStateBlackPawn&&toRow-fromRow==2){
-		if(toColumn-1>=0){
-			if([super cellStateAtColumn:toColumn-1 andRow:3]==BoardCellStateWhitePawn){
+	if(piece==BoardCellStateBlackPawn&&toCoordinates.row-fromCoordinates.row==2){
+		if(toCoordinates.column-1>=0){
+			if([super cellStateAtCoordinates:(BoardCoordinates){toCoordinates.column-1, 3}]==BoardCellStateWhitePawn){
 				un_passant.available=YES;
-				un_passant.column=toColumn;
-				un_passant.row=toRow-1;
+				un_passant.column=toCoordinates.column;
+				un_passant.row=toCoordinates.row-1;
 			}
 		}
-		if(toColumn+1<=7){
-			if([super cellStateAtColumn:toColumn+1 andRow:3]==BoardCellStateWhitePawn){
+		if(toCoordinates.column+1<=7){
+			if([super cellStateAtCoordinates:(BoardCoordinates){toCoordinates.column+1, 3}]==BoardCellStateWhitePawn){
 				un_passant.available=YES;
-				un_passant.column=toColumn;
-				un_passant.row=toRow-1;
+				un_passant.column=toCoordinates.column;
+				un_passant.row=toCoordinates.row-1;
 			}
 		}
-	}else if(piece==BoardCellStateWhitePawn&&fromRow-toRow==2){
-		if(toColumn-1>=0){
-			if([super cellStateAtColumn:toColumn-1 andRow:4]==BoardCellStateBlackPawn){
+	}else if(piece==BoardCellStateWhitePawn&&fromCoordinates.row-toCoordinates.row==2){
+		if(toCoordinates.column-1>=0){
+			if([super cellStateAtCoordinates:(BoardCoordinates){toCoordinates.column-1, 4}]==BoardCellStateBlackPawn){
 				un_passant.available=YES;
-				un_passant.column=toColumn;
-				un_passant.row=toRow+1;
+				un_passant.column=toCoordinates.column;
+				un_passant.row=toCoordinates.row+1;
 			}
 		}
-		if(toColumn+1<=7){
-			if([super cellStateAtColumn:toColumn+1 andRow:4]==BoardCellStateBlackPawn){
+		if(toCoordinates.column+1<=7){
+			if([super cellStateAtCoordinates:(BoardCoordinates){toCoordinates.column+1, 4}]==BoardCellStateBlackPawn){
 				un_passant.available=YES;
-				un_passant.column=toColumn;
-				un_passant.row=toRow+1;
+				un_passant.column=toCoordinates.column;
+				un_passant.row=toCoordinates.row+1;
 			}
 		}
 	}
@@ -327,36 +326,23 @@
 	// change player turn
 	//self.currentPlayer = !self.currentPlayer;
 }
-
+/*
 - (void)setCurrentPlayer:(PlayerTurnState)currentPlayer{
 	_currentPlayer=currentPlayer;
 	[super informDelegateOfPlayerTurnChanged:currentPlayer];
-}
+}*/
 
-- (void)selectedSquareOfColumn:(NSInteger)column andRow:(NSInteger)row{
-	if(_firsttap.isset){
-		if([self isValidMoveFromColumn:_firsttap.column andRow:_firsttap.row toColumn:column andRow:row]){
-			[self makeMoveFromColumn:_firsttap.column andRow:_firsttap.row toColumn:column andRow:row];
-		}
-	}else{
-		if([super cellStateAtColumn:column andRow:row]==BoardCellStateEmpty)return;
-		_firsttap.column=column;
-		_firsttap.row=row;
-	}
-	_firsttap.isset=!_firsttap.isset;
-}
-
-- (BOOL)canMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow withNavigationFunction:(BoardNavigationFunction)navigationFunction{
+- (BOOL)canMovefromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates  withNavigationFunction:(BoardNavigationFunction)navigationFunction{
 	
 	NSInteger index=0;
 	
     // advance to the next cell
-    navigationFunction(&fromColumn,&fromRow);
+    navigationFunction(&fromCoordinates.column,&fromCoordinates.row);
 	
     // while within the bounds of the move
-    while(fromColumn!=toColumn||fromRow!=toRow){
+    while(fromCoordinates.column!=toCoordinates.column||fromCoordinates.row!=toCoordinates.row){
 		
-        BoardCellState currentCellState = [super cellStateAtColumn:fromColumn andRow:fromRow];
+        BoardCellState currentCellState = [super cellStateAtCoordinates:fromCoordinates];
 		
 		if(currentCellState!=BoardCellStateEmpty){
 			return NO;
@@ -366,46 +352,10 @@
 		if(index++>7)break;
 		
         // advance to the next cell
-        navigationFunction(&fromColumn, &fromRow);
+        navigationFunction(&fromCoordinates.column, &fromCoordinates.row);
     }
 	
     return YES;
-}
-
-- (void)newPieceChosen:(NSInteger)piece{
-	BoardCellState state;
-	if(_newPieceLocation.row==0){ // White
-		switch (piece) {
-			case 0:
-				state=BoardCellStateWhiteQueen;
-				break;
-			case 1:
-				state=BoardCellStateWhiteRook;
-				break;
-			case 2:
-				state=BoardCellStateWhiteBishop;
-				break;
-			case 3:
-				state=BoardCellStateWhiteKnight;
-				break;
-		}
-	}else{ // Black
-		switch (piece) {
-			case 0:
-				state=BoardCellStateBlackQueen;
-				break;
-			case 1:
-				state=BoardCellStateBlackRook;
-				break;
-			case 2:
-				state=BoardCellStateBlackBishop;
-				break;
-			case 3:
-				state=BoardCellStateBlackKnight;
-				break;
-		}
-	}
-	[super setCellState:state forColumn:_newPieceLocation.column andRow:_newPieceLocation.row];
 }
 
 @end
