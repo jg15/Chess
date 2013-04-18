@@ -9,7 +9,7 @@
 #import "BoardSquareView.h"
 
 @interface BoardSquareView()
-@property (nonatomic, strong) UIImageView *pieceView;
+
 
 @end
 

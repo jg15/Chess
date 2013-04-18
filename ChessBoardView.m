@@ -9,8 +9,12 @@
 #import "ChessBoardView.h"
 #import "BoardSquareView.h"
 #import "BoardCoordinateTypes.h"
+#import <QuartzCore/QuartzCore.h>
 
-@implementation ChessBoardView
+@implementation ChessBoardView{
+	UIImageView *_origin;
+	UIImageView *_origin2;
+}
 
 @synthesize squares = _squares;
 
@@ -41,19 +45,33 @@
 	return self;
 }
 
-/*
+
  
  
- - (void)makeAnImageFlyFrom:(UIImageView *)imageViewA to:(UIImageView *)imageViewB duration:(NSTimeInterval)duration {
+ - (void)makeAnImageFlyFrom:(UIImageView *)imageViewA to:(UIImageView *)imageViewB duration:(NSTimeInterval)duration{
  
  // it's simpler but less general to not pass in the path.  i chose simpler because
  // there's a lot of geometry work using the imageView frames here anyway.
  
+#define kORIGIN_TAG 127
+#define kDEST_TAG 128
+#define kANIMATION_IMAGE_TAG 129
+	 
+ imageViewA.tag=kORIGIN_TAG;
+	 if(_origin==nil){
+		 _origin=imageViewA;
+	 }else{
+		 _origin2=imageViewA;
+	 }
+ imageViewB.tag=kDEST_TAG;
+	 
  UIImageView *animationView = [[UIImageView alloc] initWithImage:imageViewA.image];
  animationView.tag = kANIMATION_IMAGE_TAG;
  animationView.frame = imageViewA.frame;
  [self addSubview:animationView];
  
+ imageViewA.alpha=0.2;
+	 
  // scale
  CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
  [resizeAnimation setFromValue:[NSValue valueWithCGSize:imageViewA.bounds.size]];
@@ -70,18 +88,9 @@
  CGFloat endX = bRect.origin.x + bRect.size.width / 2.0;
  CGFloat endY = bRect.origin.y + bRect.size.height / 2.0;
  
- CGFloat deltaX = endX - startX;
- CGFloat deltaY = endY - startY;
- 
- // these control points suited the path i needed.  your results may vary
- CGFloat cp0X = startX + 0.3*deltaX;
- CGFloat cp0Y = startY - 1.3*deltaY;
- CGFloat cp1X = endX + 0.1*deltaX;
- CGFloat cp1Y = endY - 0.5*deltaY;
- 
  CGMutablePathRef path = CGPathCreateMutable();
  CGPathMoveToPoint(path, NULL, startX, startY);
- CGPathAddCurveToPoint(path, NULL, cp0X, cp0Y, cp1X, cp1Y, endX, endY);
+ CGPathAddCurveToPoint(path, NULL, startX, startY, endX, endY, endX, endY);
  
  // keyframe animation
  CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
@@ -113,18 +122,30 @@
  
  - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
  {
- UIImageView *imageViewForAnimation = (UIImageView *)[self viewWithTag:kANIMATION_IMAGE_TAG];
- // get the imageView passed to the animation as the destination
- UIImageView *imageViewB = (UIImageView *)[self viewWithTag:kDEST_TAG];
+	 // Delay After Animation
+	 float delay = .1;
+	 
+	 [self performSelector:@selector(animationIsFinishedIncludingDelay) withObject:nil afterDelay:delay];
  
- imageViewB.image = imageViewForAnimation.image;
- [imageViewForAnimation removeFromSuperview];
  }
  
+- (void)animationIsFinishedIncludingDelay{
+	UIImageView *imageViewForAnimation = (UIImageView *)[self viewWithTag:kANIMATION_IMAGE_TAG];
+	// get the imageView passed to the animation as the destination
+	//UIImageView *imageViewA = (UIImageView *)[self viewWithTag:kORIGIN_TAG];
+	UIImageView *imageViewB = (UIImageView *)[self viewWithTag:kDEST_TAG];
+	
+	imageViewB.image = imageViewForAnimation.image;
+	[imageViewForAnimation removeFromSuperview];
+	_origin.alpha=1.0;
+	_origin2.alpha=1.0;
+	_origin=nil;
+	_origin2=nil;
+	[self.delegate chessPieceAnimationFinished:self];
+}
  
  
  
- */
 
 
 

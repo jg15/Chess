@@ -10,7 +10,7 @@
 
 #import "Board.h"
 //#import "PlayerTurnState.h"
-#import "RequestUserInputDelegate.h"
+//#import "RequestUserInputDelegate.h"
 
 
 @interface ChessBoard : Board
@@ -22,10 +22,6 @@
 
 - (void)setToInitialState;
 - (BOOL)isValidMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates;
-//- (BOOL)isValidMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow;
-//- (void)makeMoveFromColumn:(NSInteger)fromColumn andRow:(NSInteger)fromRow toColumn:(NSInteger)toColumn andRow:(NSInteger)toRow;
 - (void)makeMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates;
-
-- (Board *)getSuperclass;
 
 @end

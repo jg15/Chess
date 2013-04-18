@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ChessBoard.h"
+#import "ChessBoardViewDelegate.h"
 
 @interface ChessBoardView : UIView
 
+@property (nonatomic, weak) id<ChessBoardViewDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *squares; // test as readonly
 
 - (id)initWithFrame:(CGRect)frame andBoard:(ChessBoard *)board;
-
+- (void)makeAnImageFlyFrom:(UIImageView *)imageViewA to:(UIImageView *)imageViewB duration:(NSTimeInterval)duration;
 @end

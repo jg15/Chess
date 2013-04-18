@@ -10,8 +10,9 @@
 #import "PlayerTurnState.h"
 #import "BoardSquareViewDelegate.h"
 #import "BoardDelegate.h"
+#import "ChessBoardViewDelegate.h"
 
-@interface ChessViewController : UIViewController <UIActionSheetDelegate,BoardSquareViewDelegate,BoardDelegate>{
+@interface ChessViewController : UIViewController <UIActionSheetDelegate,BoardSquareViewDelegate,BoardDelegate,ChessBoardViewDelegate>{
 	PlayerTurnState _playerTurn;
 }
 

@@ -72,7 +72,7 @@
 	for(int i=0;i<8;i++){
 		[super setCellState:BoardCellStateBlackPawn forCoordinates:(BoardCoordinates){i, 1}];
 	}
-	
+	//[super setCellState:BoardCellStateBlackPawn forCoordinates:(BoardCoordinates){5, 5}];
 	_whiteScore=0;
 	_blackScore=0;
 	

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef struct BoardCoordinates{
+typedef struct{
 	NSInteger column;
 	NSInteger row;
 }BoardCoordinates;

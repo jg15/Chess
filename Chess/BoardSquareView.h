@@ -13,6 +13,7 @@
 
 @interface BoardSquareView : UIView
 
+@property (nonatomic, strong) UIImageView *pieceView;
 @property (nonatomic, weak) id<BoardSquareViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame boardCellState:(BoardCellState)state andCoordinates:(BoardCoordinates)coordinates;
