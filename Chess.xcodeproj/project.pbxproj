@@ -28,6 +28,8 @@
 		57629F16171667D300FAD354 /* ChessBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57629F15171667D300FAD354 /* ChessBoardView.m */; };
 		57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AA91D61717CCCC00337E28 /* MulticastDelegate.m */; };
 		57B513E2171A2FB70072B337 /* Board.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B513E1171A2FB70072B337 /* Board.png */; };
+		57CA2F7D1721DBC00095FA30 /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CA2F7C1721DBC00095FA30 /* ScoreView.m */; };
+		57CA2F801721E1A10095FA30 /* ChessPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 57CA2F7F1721E1A10095FA30 /* ChessPiece.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,10 @@
 		57AA91D81717D99A00337E28 /* PlayerTurnState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerTurnState.h; sourceTree = "<group>"; };
 		57B513E1171A2FB70072B337 /* Board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Board.png; sourceTree = "<group>"; };
 		57B513E4171A84500072B337 /* BoardNavigationFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardNavigationFunctions.h; sourceTree = "<group>"; };
+		57CA2F7B1721DBC00095FA30 /* ScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreView.h; sourceTree = "<group>"; };
+		57CA2F7C1721DBC00095FA30 /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
+		57CA2F7E1721E1A10095FA30 /* ChessPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessPiece.h; sourceTree = "<group>"; };
+		57CA2F7F1721E1A10095FA30 /* ChessPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChessPiece.m; sourceTree = "<group>"; };
 		57FD6F31171E3DB2007A3FBF /* ChessBoardViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessBoardViewDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +189,10 @@
 				57629F111716667F00FAD354 /* BoardSquareView.m */,
 				57629F14171667D300FAD354 /* ChessBoardView.h */,
 				57629F15171667D300FAD354 /* ChessBoardView.m */,
+				57CA2F7B1721DBC00095FA30 /* ScoreView.h */,
+				57CA2F7C1721DBC00095FA30 /* ScoreView.m */,
+				57CA2F7E1721E1A10095FA30 /* ChessPiece.h */,
+				57CA2F7F1721E1A10095FA30 /* ChessPiece.m */,
 			);
 			name = View;
 			path = ..;
@@ -276,6 +286,8 @@
 				57629F131716667F00FAD354 /* BoardSquareView.m in Sources */,
 				57629F16171667D300FAD354 /* ChessBoardView.m in Sources */,
 				57AA91D71717D22500337E28 /* MulticastDelegate.m in Sources */,
+				57CA2F7D1721DBC00095FA30 /* ScoreView.m in Sources */,
+				57CA2F801721E1A10095FA30 /* ChessPiece.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +385,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
 				INFOPLIST_FILE = "Chess/Chess-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -385,7 +397,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Chess/Chess-Prefix.pch";
 				INFOPLIST_FILE = "Chess/Chess-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

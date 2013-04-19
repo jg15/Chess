@@ -76,63 +76,17 @@
 }
 
 - (void)updateWithCellState:(BoardCellState)state{
-/*
-	if(_playerTurn==PlayerTurnBlack){
-		state = [_board cellStateAtColumn:7-_column andRow:7-_row];
-	}else{
-		state = [_board cellStateAtColumn:_column andRow:_row];
-	}*/
-	
-	NSArray *imageFileNames = @[@"blank",@"blackKing",@"blackQueen",@"blackRook",@"blackBishop",@"blackKnight",@"blackPawn",@"whiteKing",@"whiteQueen",@"whiteRook",@"whiteBishop",@"whiteKnight",@"whitePawn"];
-	
-	self.pieceView.image = [UIImage imageNamed:
-						[NSString stringWithFormat:@"Pieces/%@.png",
-						 [imageFileNames objectAtIndex:state]]];
+
+	self.pieceView.image = [ChessPiece pieceWithBoardCellState:state];
 
 }
-/*
-- (void)cellStateChanged:(BoardCellState)state forColumn:(NSInteger)column andRow:(NSInteger)row{
-	if(column==-1&&row==-1){
-		[self update];
-		return;
-	}
-	if(_playerTurn==PlayerTurnBlack&&(column==7-_column&&row==7-_row)){
-		[self update];
-	}else if(column==_column&&row==_row){
-		[self update];
-	}
-	//(column==_column&&row==_row)||
-}*/
-/*
-- (void)playerTurnChanged:(PlayerTurnState)player{
-	_playerTurn=player;
-	[self update];
-}
-*/
+
 - (void)cellTapped:(UITapGestureRecognizer *)recognizer{
-	NSLog(@"tap");
+	
 	//[self.pieceView.layer addAnimation:pulseAnimation forKey:@"opacity"];
+	
 	[self.delegate boardSquareCellTapped:self atCoordinates:_coordinates];
-	/*
-	if(_playerTurn==PlayerTurnBlack){
-		[_board selectedSquareOfColumn:7-_column andRow:7-_row];
-	}else{
-		[_board selectedSquareOfColumn:_column andRow:_row];
-	}
-	 */
-}
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
--(void)hi{
-	NSLog(@"hi");
 }
 
 @end

@@ -9,7 +9,6 @@
 #import "ChessBoardView.h"
 #import "BoardSquareView.h"
 #import "BoardCoordinateTypes.h"
-#import <QuartzCore/QuartzCore.h>
 
 @implementation ChessBoardView{
 	UIImageView *_origin;
@@ -49,76 +48,64 @@
  
  
  - (void)makeAnImageFlyFrom:(UIImageView *)imageViewA to:(UIImageView *)imageViewB duration:(NSTimeInterval)duration{
- 
- // it's simpler but less general to not pass in the path.  i chose simpler because
- // there's a lot of geometry work using the imageView frames here anyway.
- 
-#define kORIGIN_TAG 127
-#define kDEST_TAG 128
-#define kANIMATION_IMAGE_TAG 129
+	
+	#define kORIGIN_TAG 127
+	#define kDEST_TAG 128
+	#define kANIMATION_IMAGE_TAG 129
 	 
- imageViewA.tag=kORIGIN_TAG;
-	 if(_origin==nil){
-		 _origin=imageViewA;
-	 }else{
-		 _origin2=imageViewA;
-	 }
- imageViewB.tag=kDEST_TAG;
+	imageViewA.tag=kORIGIN_TAG;
+	if(_origin==nil){
+		_origin=imageViewA;
+	}else{
+		_origin2=imageViewA;
+	}
+	imageViewB.tag=kDEST_TAG;
 	 
- UIImageView *animationView = [[UIImageView alloc] initWithImage:imageViewA.image];
- animationView.tag = kANIMATION_IMAGE_TAG;
- animationView.frame = imageViewA.frame;
- [self addSubview:animationView];
+	 UIImageView *animationView = [[UIImageView alloc] initWithImage:imageViewA.image];
+	 animationView.tag = kANIMATION_IMAGE_TAG;
+	 animationView.frame = imageViewA.frame;
+	 [self addSubview:animationView];
  
- imageViewA.alpha=0.2;
+	 imageViewA.alpha=0.2;
 	 
- // scale
- CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
- [resizeAnimation setFromValue:[NSValue valueWithCGSize:imageViewA.bounds.size]];
- [resizeAnimation setToValue:[NSValue valueWithCGSize:imageViewB.bounds.size]];
+	 // scale
+	 CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+	 [resizeAnimation setFromValue:[NSValue valueWithCGSize:imageViewA.bounds.size]];
+	 [resizeAnimation setToValue:[NSValue valueWithCGSize:imageViewB.bounds.size]];
  
- // build the path
- CGRect aRect = [imageViewA convertRect:imageViewA.bounds toView:self];
- CGRect bRect = [imageViewB convertRect:imageViewB.bounds toView:self];
+	 // build the path
+	 CGRect aRect = [imageViewA convertRect:imageViewA.bounds toView:self];
+	 CGRect bRect = [imageViewB convertRect:imageViewB.bounds toView:self];
  
- // unclear why i'm doing this, but the rects converted to this view's
- // coordinate system seemed have origin's offset negatively by half their size
- CGFloat startX = aRect.origin.x + aRect.size.width / 2.0;
- CGFloat startY = aRect.origin.y + aRect.size.height / 2.0;
- CGFloat endX = bRect.origin.x + bRect.size.width / 2.0;
- CGFloat endY = bRect.origin.y + bRect.size.height / 2.0;
+	 CGFloat startX = aRect.origin.x + aRect.size.width / 2.0;
+	 CGFloat startY = aRect.origin.y + aRect.size.height / 2.0;
+	 CGFloat endX = bRect.origin.x + bRect.size.width / 2.0;
+	 CGFloat endY = bRect.origin.y + bRect.size.height / 2.0;
  
- CGMutablePathRef path = CGPathCreateMutable();
- CGPathMoveToPoint(path, NULL, startX, startY);
- CGPathAddCurveToPoint(path, NULL, startX, startY, endX, endY, endX, endY);
+	 CGMutablePathRef path = CGPathCreateMutable();
+	 CGPathMoveToPoint(path, NULL, startX, startY);
+	 CGPathAddCurveToPoint(path, NULL, startX, startY, endX, endY, endX, endY);
  
- // keyframe animation
- CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
- keyframeAnimation.calculationMode = kCAAnimationPaced;
- keyframeAnimation.fillMode = kCAFillModeForwards;
- keyframeAnimation.removedOnCompletion = NO;
- keyframeAnimation.path = path;
+	 // keyframe animation
+	 CAKeyframeAnimation *keyframeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+	 keyframeAnimation.calculationMode = kCAAnimationPaced;
+	 keyframeAnimation.fillMode = kCAFillModeForwards;
+	 keyframeAnimation.removedOnCompletion = NO;
+	 keyframeAnimation.path = path;
+
+	 CGPathRelease(path);
  
- // assuming i need to manually release, despite ARC, but not sure
- CGPathRelease(path);
+	 CAAnimationGroup *group = [CAAnimationGroup animation];
+	 group.fillMode = kCAFillModeForwards;
+	 group.removedOnCompletion = NO;
+	 [group setAnimations:[NSArray arrayWithObjects:keyframeAnimation, resizeAnimation, nil]];
+	 group.duration = duration;
+	 group.delegate = self;
  
- // a little unclear about the fillMode, but it works
- // also unclear about removeOnCompletion, because I remove the animationView
- // but that seems to be insufficient
- CAAnimationGroup *group = [CAAnimationGroup animation];
- group.fillMode = kCAFillModeForwards;
- group.removedOnCompletion = NO;
- [group setAnimations:[NSArray arrayWithObjects:keyframeAnimation, resizeAnimation, nil]];
- group.duration = duration;
- group.delegate = self;
+	 [group setValue:animationView forKey:@"animationView"];
  
- // unclear about what i'm naming with the keys here, and why
- [group setValue:animationView forKey:@"animationView"];
- 
- [animationView.layer addAnimation:group forKey:@"animationGroup"];
+	 [animationView.layer addAnimation:group forKey:@"animationGroup"];
  }
- 
- // clean up after like this
  
  - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
  {
@@ -131,8 +118,6 @@
  
 - (void)animationIsFinishedIncludingDelay{
 	UIImageView *imageViewForAnimation = (UIImageView *)[self viewWithTag:kANIMATION_IMAGE_TAG];
-	// get the imageView passed to the animation as the destination
-	//UIImageView *imageViewA = (UIImageView *)[self viewWithTag:kORIGIN_TAG];
 	UIImageView *imageViewB = (UIImageView *)[self viewWithTag:kDEST_TAG];
 	
 	imageViewB.image = imageViewForAnimation.image;

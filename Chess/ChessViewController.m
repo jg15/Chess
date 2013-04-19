@@ -11,6 +11,7 @@
 #import "ChessBoardView.h"
 #import "BoardCoordinateTypes.h"
 #import "BoardSquareView.h"
+#import "ScoreView.h"
 
 @interface ChessViewController ()
 
@@ -20,7 +21,13 @@
 @property (nonatomic, strong) ChessBoard *chessBoard;
 @property (nonatomic, strong) ChessBoardView *chessBoardView;
 
+@property (nonatomic, strong) ScoreView *whiteScoreView;
+@property (nonatomic, strong) ScoreView *blackScoreView;
+
 @property (nonatomic) BOOL localGameIsTwoPlayer;
+
+@property (nonatomic, strong) NSMutableArray *whitesCapturedPieces;
+@property (nonatomic, strong) NSMutableArray *blacksCapturedPieces;
 
 - (void)loadChessBoard;
 
@@ -41,6 +48,9 @@
 	BOOL _shouldNotMove;
 }
 
+@synthesize whitesCapturedPieces = _whitesCapturedPieces;
+@synthesize blacksCapturedPieces = _blacksCapturedPieces;
+
 #pragma mark -
 #pragma mark Init View
 
@@ -54,6 +64,9 @@
 	// Load Chess Board
 	[self loadChessBoard];
 	
+	// Load Score Areas
+	[self loadScoreAreas];
+	
 	self.localGameIsTwoPlayer = YES;
 	
 }
@@ -62,6 +75,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadScoreAreas{
+	//self.whiteScoreView = [[ScoreView alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
+	//self.blackScoreView = [[ScoreView alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
 }
 
 #pragma mark -
@@ -301,9 +319,41 @@
 }
 
 
+- (void)pieceWasTaken:(BoardCellState)piece{
+	if(piece<=6){ // Black Piece
+		[self.whitesCapturedPieces addObject:[NSNumber numberWithInt:piece]];
+	}else if (piece>=7){ // White Piece
+		[self.blacksCapturedPieces addObject:[NSNumber numberWithInt:piece]];
+	}
+}
 
+#pragma mark -
+#pragma mark Scoring
 
+- (NSMutableArray *)whitesCapturedPieces{
+	if(!_whitesCapturedPieces){
+		_whitesCapturedPieces = [[NSMutableArray alloc] init];
+	}
+	return _whitesCapturedPieces;
+}
 
+- (NSMutableArray *)blacksCapturedPieces{
+	if(!_blacksCapturedPieces){
+		_blacksCapturedPieces = [[NSMutableArray alloc] init];
+	}
+	return _blacksCapturedPieces;
+}
 
+- (void)setWhitesCapturedPieces:(NSMutableArray *)whitesCapturedPieces{
+	_whitesCapturedPieces = whitesCapturedPieces;
+	
+	
+}
+
+- (void)setBlacksCapturedPieces:(NSMutableArray *)blacksCapturedPieces{
+	_blacksCapturedPieces = blacksCapturedPieces;
+	
+	
+}
 
 @end

@@ -12,4 +12,5 @@
 
 @protocol BoardDelegate <NSObject>
 - (void)cellStateChanged:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
+- (void)pieceWasTaken:(BoardCellState)piece;
 @end

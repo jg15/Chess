@@ -80,8 +80,18 @@
 	//self.currentPlayer = PlayerTurnWhite;
 }
 
-- (BOOL)willKingBeInCheckInSquareOfColumn:(NSInteger)column andRow:(NSInteger)row{
-	// TODO
+- (BOOL)willKingBeInCheckInSquareWithCoordinates:(BoardCoordinates)coordinates{
+	
+	//[self canMovefromCoordinates:<#(BoardCoordinates)#> toCoordinates:<#(BoardCoordinates)#> withNavigationFunction:<#^(NSInteger *, NSInteger *)navigationFunction#>];
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	return NO;
 }
 
@@ -124,7 +134,7 @@
 			}
 		}
 		if(abs(fromCoordinates.column-toCoordinates.column)>1||abs(fromCoordinates.row-toCoordinates.row)>1)return NO;
-		return ![self willKingBeInCheckInSquareOfColumn:toCoordinates.column andRow:toCoordinates.row];
+		return ![self willKingBeInCheckInSquareWithCoordinates:toCoordinates];
 	}else if(piece==BoardCellStateBlackQueen||piece==BoardCellStateWhiteQueen){
 		// Queen
 		if(piece==BoardCellStateBlackQueen){
@@ -227,6 +237,9 @@
 	// move piece to given location
 	
 	BoardCellState piece = [super cellStateAtCoordinates:fromCoordinates];
+	BoardCellState toPiece = [super cellStateAtCoordinates:toCoordinates];
+	
+	if(toPiece!=BoardCellStateEmpty)[self.boardDelegate pieceWasTaken:toPiece];
 	
 	// Move piece
 	[super setCellState:piece forCoordinates:toCoordinates];

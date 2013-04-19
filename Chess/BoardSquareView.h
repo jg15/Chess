@@ -10,6 +10,7 @@
 #import "BoardCoordinateTypes.h"
 #import "BoardCellState.h"
 #import "BoardSquareViewDelegate.h"
+#import "ChessPiece.h"
 
 @interface BoardSquareView : UIView
 
@@ -19,5 +20,4 @@
 - (id)initWithFrame:(CGRect)frame boardCellState:(BoardCellState)state andCoordinates:(BoardCoordinates)coordinates;
 - (void)updateWithCellState:(BoardCellState)state;
 
--(void)hi;
 @end
