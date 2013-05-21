@@ -9,7 +9,7 @@
 //
 
 #import "Board.h"
-//#import "PlayerTurnState.h"
+#import "PlayerTurnState.h"
 //#import "RequestUserInputDelegate.h"
 
 
@@ -23,5 +23,6 @@
 - (void)setToInitialState;
 - (BOOL)isValidMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates;
 - (void)makeMoveFromCoordinates:(BoardCoordinates)fromCoordinates toCoordinates:(BoardCoordinates)toCoordinates;
+- (BOOL)isGameOverWithPlayerTurn:(PlayerTurnState)turn;
 
 @end

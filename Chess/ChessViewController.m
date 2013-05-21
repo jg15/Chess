@@ -49,6 +49,8 @@
 	
 	BoardCoordinates _doNotMove;
 	BOOL _shouldNotMove;
+	
+	BOOL _gameIsOver;
 }
 
 @synthesize whitesCapturedPieces = _whitesCapturedPieces;
@@ -69,6 +71,8 @@
 	
 	// Load Score Areas
 	[self loadScoreAreas];
+	
+	_gameIsOver = NO;
 	
 	self.localGameIsTwoPlayer = YES;
 	
@@ -122,6 +126,16 @@
 	//if(_playerTurn == PlayerTurnBlack)[self rotateBoard];
 }
 
+- (void)nextTurn{
+	_playerTurn = !_playerTurn;
+	if([self.chessBoard isGameOverWithPlayerTurn:_playerTurn]){
+		_gameIsOver = YES;
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Game Over" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		[alert show];
+	}
+}
+
 - (void)updateBoardView{
 	NSUInteger index=0;
 	for (BoardSquareView *square in self.chessBoardView.squares) {
@@ -132,6 +146,8 @@
 
 
 - (void)boardSquareCellTapped:(BoardSquareView *)sender atCoordinates:(BoardCoordinates)coordinates{
+
+	if(_gameIsOver)return;
 	
 	if(_pieceIsAnimated)return;
 	
@@ -242,12 +258,21 @@
 
 		[self popup];
 	}else if(self.localGameIsTwoPlayer){
-		_playerTurn = !_playerTurn;
+		[self nextTurn];
 		[self rotateBoard];
+	}else{
+		[self nextTurn];
+		
 	}
 	_pieceIsAnimated=NO;
 }
 
+- (void)kingInCheck{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Check!" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	
+	[alert show];
+	
+}
 
 - (void)cellStateChanged:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates{
 	if(coordinates.column==-1&&coordinates.row==-1){
@@ -311,8 +336,9 @@
 
 		[self.chessBoard setCellState:state forCoordinates:_newPieceRealLocation];
 		if(self.localGameIsTwoPlayer){
-			_playerTurn = !_playerTurn;
 			[self rotateBoard];
+		}else{
+			[self nextTurn];
 		}
 	}
 	//NSLog(@"Button #%d clicked",buttonIndex);
@@ -344,6 +370,7 @@
 }
 
 - (IBAction)reset:(id)sender{
+	_gameIsOver = NO;
 	_firsttapIsset = NO;
 	if(_playerTurn == PlayerTurnBlack)[self rotateBoard];
 	_playerTurn = PlayerTurnWhite;

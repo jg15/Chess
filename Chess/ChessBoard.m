@@ -382,6 +382,7 @@
 		if([self willKingBeInCheckInSquareWithCoordinates:whiteKingLocation king:BoardCellStateWhiteKing]){
 			whiteKingIsInCheck=YES;
 			NSLog(@"WHITE KING IN CHECK");
+			[self.boardDelegate kingInCheck];
 		}
 		blackKingIsInCheck=NO;
 	}else if(piece>=7){ // white moved
@@ -389,6 +390,7 @@
 		if([self willKingBeInCheckInSquareWithCoordinates:blackKingLocation king:BoardCellStateBlackKing]){
 			blackKingIsInCheck=YES;
 			NSLog(@"BLACK KING IN CHECK");
+			[self.boardDelegate kingInCheck];
 		}
 		whiteKingIsInCheck=NO;
 	}
@@ -515,6 +517,59 @@
     }
 	
     return YES;
+}
+
+- (BOOL)isGameOverWithPlayerTurn:(PlayerTurnState)turn{
+		// Run through all pieces
+		for (int iRow = 0; iRow < 8; ++iRow) {
+			for (int iCol = 0; iCol < 8; ++iCol) {
+				BoardCellState piece = [super cellStateAtCoordinates:(BoardCoordinates){iCol,iRow}];
+				
+				if (piece != BoardCellStateEmpty) {
+					// If it is a piece of the current player, see if it has a legal move
+					
+					if((piece<=6&&piece!=0&&turn==PlayerTurnWhite)||(piece>=7&&turn==PlayerTurnBlack)){
+					
+					
+					
+					
+					//if (mqpaaBoard[iRow][iCol]->GetColor() == cColor) {
+						
+						
+						
+						for (int iMoveRow = 0; iMoveRow < 8; ++iMoveRow) {
+							for (int iMoveCol = 0; iMoveCol < 8; ++iMoveCol) {
+								
+								
+								if([self isValidMoveFromCoordinates:(BoardCoordinates){iCol,iRow} toCoordinates:(BoardCoordinates){iMoveCol,iMoveRow}]){
+								
+									if(turn==PlayerTurnBlack&&blackKingIsInCheck)return YES;
+									if(turn==PlayerTurnWhite&&whiteKingIsInCheck)return YES;
+								/*
+								//if (mqpaaBoard[iRow][iCol]->IsLegalMove(iRow, iCol, iMoveRow, iMoveCol, mqpaaBoard)) {
+									// Make move and check whether king is in check
+									CAPiece* qpTemp					= mqpaaBoard[iMoveRow][iMoveCol];
+									mqpaaBoard[iMoveRow][iMoveCol]	= mqpaaBoard[iRow][iCol];
+									mqpaaBoard[iRow][iCol]			= 0;
+									bool bCanMove = !IsInCheck(cColor);
+									// Undo the move
+									mqpaaBoard[iRow][iCol]			= mqpaaBoard[iMoveRow][iMoveCol];
+									mqpaaBoard[iMoveRow][iMoveCol]	= qpTemp;
+									if (bCanMove) {
+										return true;
+									}
+								*/
+								 
+								 }
+									
+							}
+						}
+					}
+				}
+			}
+		
+	}
+	return NO;
 }
 
 @end
