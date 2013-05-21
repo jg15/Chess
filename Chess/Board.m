@@ -14,6 +14,7 @@
 
 @implementation Board{
 	NSUInteger _board[8][8];
+	NSUInteger _board2[8][8];
 }
 
 - (id)init{
@@ -44,5 +45,23 @@
 	memset(_board, 0, sizeof(NSUInteger)*8*8);
 	[self.boardDelegate cellStateChanged:BoardCellStateEmpty forCoordinates:(BoardCoordinates){-1,-1}];
 }
+
+//********************************************************
+
+- (void)copyBoard{
+	memset(_board2, 0, sizeof(NSUInteger)*8*8);
+	memcpy(_board2, _board, sizeof(NSUInteger)*8*8);
+}
+
+- (BoardCellState)cellStateAtCoordinatesBoard2:(BoardCoordinates)coordinates{
+    [self checkBoundsForCoordinates:coordinates];
+    return _board2[coordinates.column][coordinates.row];
+}
+
+- (void)setCellStateBoard2:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates{
+    [self checkBoundsForCoordinates:coordinates];
+    _board2[coordinates.column][coordinates.row] = state;
+}
+
 
 @end

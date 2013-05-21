@@ -25,5 +25,10 @@
 
 - (void)clearBoard;
 
+- (void)copyBoard;
+
+- (BoardCellState)cellStateAtCoordinatesBoard2:(BoardCoordinates)coordinates;
+
+- (void)setCellStateBoard2:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
 
 @end

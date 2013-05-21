@@ -66,7 +66,7 @@
 	 animationView.frame = imageViewA.frame;
 	 [self addSubview:animationView];
  
-	 imageViewA.alpha=0.2;
+	 imageViewA.alpha=0.0;
 	 
 	 // scale
 	 CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];

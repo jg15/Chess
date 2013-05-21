@@ -24,6 +24,9 @@
 @property (nonatomic, strong) ScoreView *whiteScoreView;
 @property (nonatomic, strong) ScoreView *blackScoreView;
 
+@property (nonatomic, strong) UIView *aboveBoardView;
+@property (nonatomic, strong) UIView *bellowBoardView;
+
 @property (nonatomic) BOOL localGameIsTwoPlayer;
 
 @property (nonatomic, strong) NSMutableArray *whitesCapturedPieces;
@@ -78,7 +81,15 @@
 }
 
 - (void)loadScoreAreas{
-	//self.whiteScoreView = [[ScoreView alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
+	
+	CGFloat a=(self.view.bounds.size.height-self.view.bounds.size.width)*.5*.5*.5;
+	
+	
+	self.whiteScoreView = [[ScoreView alloc] initWithFrame:CGRectMake(0, a, self.view.bounds.size.width, (self.view.bounds.size.height-self.view.bounds.size.width)*.5*.5)];
+	
+	self.whiteScoreView.backgroundColor=[UIColor greenColor];
+	
+	[self.view addSubview:self.whiteScoreView];
 	//self.blackScoreView = [[ScoreView alloc] initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)];
 }
 
@@ -143,17 +154,21 @@
 	
 	
 	if(_firsttapIsset){
+		BoardSquareView *fromSquare;
+		BoardSquareView *toSquare;
+		
+		fromSquare=[self.chessBoardView.squares objectAtIndex:_firstTap.row*8+_firstTap.column];
+		toSquare=[self.chessBoardView.squares objectAtIndex:coordinates.row*8+coordinates.column];
+		
+		[fromSquare stopPulsing];
+		
 		if([self.chessBoard isValidMoveFromCoordinates:realFirstTapCoordinates toCoordinates:realCoordinates]){
 			NSLog(@"valid");
 			//int index=_firstTap.row*8+_firstTap.column;
-			BoardSquareView *fromSquare;
-			BoardSquareView *toSquare;
-			
-			fromSquare=[self.chessBoardView.squares objectAtIndex:_firstTap.row*8+_firstTap.column];
-			toSquare=[self.chessBoardView.squares objectAtIndex:coordinates.row*8+coordinates.column];
 			
 			_pieceIsAnimated=YES;
 			_secondTap=coordinates;
+			
 			[self.chessBoardView makeAnImageFlyFrom:fromSquare.pieceView to:toSquare.pieceView duration:.5];
 			
 			
@@ -196,6 +211,7 @@
 		BoardCellState state = [self.chessBoard cellStateAtCoordinates:realCoordinates];
 		if(state==BoardCellStateEmpty)return;
 		_firstTap=coordinates;
+		[[self.chessBoardView.squares objectAtIndex:_firstTap.row*8+_firstTap.column] startPulsing];
 	}
 	_firsttapIsset=!_firsttapIsset;
 }
@@ -325,6 +341,13 @@
 	}else if (piece>=7){ // White Piece
 		[self.blacksCapturedPieces addObject:[NSNumber numberWithInt:piece]];
 	}
+}
+
+- (IBAction)reset:(id)sender{
+	_firsttapIsset = NO;
+	if(_playerTurn == PlayerTurnBlack)[self rotateBoard];
+	_playerTurn = PlayerTurnWhite;
+	[self.chessBoard setToInitialState];
 }
 
 #pragma mark -

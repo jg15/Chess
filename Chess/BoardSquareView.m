@@ -7,6 +7,7 @@
 //
 #import <QuartzCore/QuartzCore.h>
 #import "BoardSquareView.h"
+#import "ChessPiece.h"
 
 @interface BoardSquareView()
 
@@ -57,9 +58,9 @@
 	
     CGFloat radius = diameter * 0.5;
     CGColorSpaceRef baseColorSpace = CGColorSpaceCreateDeviceRGB();
-    CGFloat colours[8] = { 0.56f, 0.78f, 0.94f, 1.0f,     // Opaque dot colour.
+    CGFloat colors[8] = { 0.56f, 0.78f, 0.94f, 1.0f,     // Opaque dot colour.
 		0.56f, 0.78f, 0.94f, 0.0f };      // Transparent dot colour.
-    CGGradientRef gradient = CGGradientCreateWithColorComponents (baseColorSpace, colours, NULL, 2);
+    CGGradientRef gradient = CGGradientCreateWithColorComponents (baseColorSpace, colors, NULL, 2);
 	
     CGContextDrawRadialGradient(context, gradient, CGPointMake(radius, radius), 0.0f, CGPointMake(radius, radius), radius, kCGGradientDrawsAfterEndLocation);
 	
@@ -82,11 +83,18 @@
 }
 
 - (void)cellTapped:(UITapGestureRecognizer *)recognizer{
-	
 	//[self.pieceView.layer addAnimation:pulseAnimation forKey:@"opacity"];
 	
 	[self.delegate boardSquareCellTapped:self atCoordinates:_coordinates];
 
+}
+
+- (void)startPulsing{
+	[self.pieceView.layer addAnimation:pulseAnimation forKey:@"opacity"];
+}
+
+- (void)stopPulsing{
+	[self.pieceView.layer removeAnimationForKey:@"opacity"];
 }
 
 @end
