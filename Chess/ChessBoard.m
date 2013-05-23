@@ -190,13 +190,21 @@
 	
 	
 	if(piece==BoardCellStateBlackKing||piece==BoardCellStateWhiteKing){
+		
+		kingCoordinates=toCoordinates;
+		
 		// King
 		if(piece==BoardCellStateBlackKing){
+			
+			
+			
+			
 			if(toSquareState<=6&&toSquareState!=0)return NO;
 			// Castling
 			if(!castling.blackKingMoved&&((toCoordinates.column==2&&!castling.blackLeftRookMoved)||(toCoordinates.column==6&&!castling.blackRightRookMoved))&&toCoordinates.row==0){
 				if(fromCoordinates.column<toCoordinates.column){
 					if([self canMovefromCoordinates:fromCoordinates toCoordinates:toCoordinates withNavigationFunction:BoardNavigationFunctionRight actualBoard:actualBoard]){
+						
 						if(!alreadyRun)return ![self willKingBeInCheckInSquareWithCoordinates:kingCoordinates king:king newPieceLocation1:toCoordinates piece1:piece location2:fromCoordinates piece2:BoardCellStateEmpty];
 						return YES;
 					}
@@ -520,6 +528,17 @@
 }
 
 - (BOOL)isGameOverWithPlayerTurn:(PlayerTurnState)turn{
+	
+	if(![self playerCanMove:turn]){
+		return YES;
+	}
+	NSLog(@"Game not over");
+	return NO;
+		
+}
+
+- (BOOL)playerCanMove:(PlayerTurnState)turn{
+	
 		// Run through all pieces
 		for (int iRow = 0; iRow < 8; ++iRow) {
 			for (int iCol = 0; iCol < 8; ++iCol) {
@@ -528,7 +547,7 @@
 				if (piece != BoardCellStateEmpty) {
 					// If it is a piece of the current player, see if it has a legal move
 					
-					if((piece<=6&&piece!=0&&turn==PlayerTurnWhite)||(piece>=7&&turn==PlayerTurnBlack)){
+					if((piece<=6&&piece!=0&&turn!=PlayerTurnWhite)||(piece>=7&&turn!=PlayerTurnBlack)){
 					
 					
 					
@@ -543,8 +562,53 @@
 								
 								if([self isValidMoveFromCoordinates:(BoardCoordinates){iCol,iRow} toCoordinates:(BoardCoordinates){iMoveCol,iMoveRow}]){
 								
-									if(turn==PlayerTurnBlack&&blackKingIsInCheck)return YES;
-									if(turn==PlayerTurnWhite&&whiteKingIsInCheck)return YES;
+									//if(turn==PlayerTurnBlack&&blackKingIsInCheck)return YES;
+									//if(turn==PlayerTurnWhite&&whiteKingIsInCheck)return YES;
+									
+									/*
+									[super copyBoard];
+									[super setCellStateBoard2:[super cellStateAtCoordinates:(BoardCoordinates){iCol,iRow}] forCoordinates:(BoardCoordinates){iMoveCol,iMoveRow}];
+									[super setCellStateBoard2:BoardCellStateEmpty forCoordinates:(BoardCoordinates){iCol,iRow}];
+									
+									
+									BoardCellState movePiece = [super cellStateAtCoordinatesBoard2:(BoardCoordinates){iMoveCol,iMoveRow}];*/
+									
+									BoardCoordinates kingLoc = turn==PlayerTurnWhite ? blackKingLocation : whiteKingLocation;
+									
+									BoardCellState king = turn==PlayerTurnWhite ? BoardCellStateBlackKing : BoardCellStateWhiteKing;
+									
+									if([super cellStateAtCoordinatesBoard2:kingLoc]!=king){
+										kingLoc=(BoardCoordinates){iMoveCol,iMoveRow};
+									}
+									
+									
+									
+									
+									if(![self willKingBeInCheckInSquareWithCoordinates:kingLoc king:king newPieceLocation1:(BoardCoordinates){iMoveCol,iMoveRow} piece1:[super cellStateAtCoordinates:(BoardCoordinates){iCol,iRow}] location2:(BoardCoordinates){iCol,iRow} piece2:BoardCellStateEmpty]){
+										return YES;
+									}
+									
+									
+									
+									/*
+									if(movePiece<=6){ // black moved
+										// check if white king is now in check
+										if([self willKingBeInCheckInSquareWithCoordinates:whiteKingLocation king:BoardCellStateWhiteKing]){
+											//whiteKingIsInCheck=YES;
+											NSLog(@"WHITE KING IN CHECK");
+											//[self.boardDelegate kingInCheck];
+										}
+										blackKingIsInCheck=NO;
+									}else if(movePiece>=7){ // white moved
+										// check if black king is now in check
+										if([self willKingBeInCheckInSquareWithCoordinates:blackKingLocation king:BoardCellStateBlackKing]){
+											//blackKingIsInCheck=YES;
+											NSLog(@"BLACK KING IN CHECK");
+											//[self.boardDelegate kingInCheck];
+										}
+										whiteKingIsInCheck=NO;
+									}*/
+									
 								/*
 								//if (mqpaaBoard[iRow][iCol]->IsLegalMove(iRow, iCol, iMoveRow, iMoveCol, mqpaaBoard)) {
 									// Make move and check whether king is in check
