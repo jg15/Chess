@@ -9,7 +9,7 @@
 #ifndef Chess_PlayerTurnState_h
 #define Chess_PlayerTurnState_h
 
-typedef NS_ENUM(NSUInteger, PlayerTurnState){
+typedef NS_ENUM(short, PlayerTurnState){
 	PlayerTurnWhite = 0,
 	PlayerTurnBlack = 1
 };

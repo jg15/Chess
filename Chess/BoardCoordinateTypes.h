@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 typedef struct{
-	NSInteger column;
-	NSInteger row;
+	int column;
+	int row;
 }BoardCoordinates;

@@ -8,40 +8,40 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^BoardNavigationFunction)(NSInteger*, NSInteger*);
+typedef void(^BoardNavigationFunction)(int*, int*);
 
-BoardNavigationFunction BoardNavigationFunctionRight = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionRight = ^(int *c, int *r){
     (*c)++;
 };
 
-BoardNavigationFunction BoardNavigationFunctionLeft = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionLeft = ^(int *c, int *r){
     (*c)--;
 };
 
-BoardNavigationFunction BoardNavigationFunctionUp = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionUp = ^(int *c, int *r){
     (*r)--;
 };
 
-BoardNavigationFunction BoardNavigationFunctionDown = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionDown = ^(int *c, int *r){
     (*r)++;
 };
 
-BoardNavigationFunction BoardNavigationFunctionRightUp = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionRightUp = ^(int *c, int *r){
     (*c)++;
     (*r)--;
 };
 
-BoardNavigationFunction BoardNavigationFunctionRightDown = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionRightDown = ^(int *c, int *r){
     (*c)++;
     (*r)++;
 };
 
-BoardNavigationFunction BoardNavigationFunctionLeftUp = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionLeftUp = ^(int *c, int *r){
     (*c)--;
     (*r)--;
 };
 
-BoardNavigationFunction BoardNavigationFunctionLeftDown = ^(NSInteger *c, NSInteger *r){
+BoardNavigationFunction BoardNavigationFunctionLeftDown = ^(int *c, int *r){
     (*c)--;
     (*r)++;
 };

@@ -23,6 +23,8 @@
 
 - (void)setCellState:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
 
+- (void)setCellStateWithoutDelegate:(BoardCellState)state forCoordinates:(BoardCoordinates)coordinates;
+
 - (void)clearBoard;
 
 - (void)copyBoard;

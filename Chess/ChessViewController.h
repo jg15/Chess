@@ -11,9 +11,12 @@
 #import "BoardSquareViewDelegate.h"
 #import "BoardDelegate.h"
 #import "ChessBoardViewDelegate.h"
+#import "EngineController.h"
+#import "Move.h"
 
 @interface ChessViewController : UIViewController <UIActionSheetDelegate,BoardSquareViewDelegate,BoardDelegate,ChessBoardViewDelegate>{
 	PlayerTurnState _playerTurn;
+    EngineController *engineController;
 }
 
 @property (readonly) struct{
@@ -22,5 +25,10 @@
 	NSInteger row;
 }firsttap;
 
+@property BOOL singlePlayerMode;
+
+- (void)displayPV:(NSString *)pv;
+- (void)displaySearchStats:(NSString *)searchStats;
+- (void)engineMadeMove:(NSArray *)array;
 
 @end
